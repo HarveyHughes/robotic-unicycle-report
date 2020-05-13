@@ -375,12 +375,38 @@ The phone is used to take advantage of high quality sensors existing in a device
 The Rasberry Pi is used to control the motor torques via the attached motor board. This replaced a normal micro controller and was chosen to allow future adaptability in design as a Raspberry Pi has lots of additional functionality over a micro controller.
 \newline
 The phone and Pi were unreliability attached using rubber bands. This introduced lots of additional noise as the sensor could move between rollouts or during a rollout, therefore effecting the generalisation of learnt dynamics to all rollouts. To minimise this problem the phone was realigned by attaching and reattaching before each trial. 
+\begin{figure*}[t!]
+  \centering
+    \includegraphics[width=\linewidth]{pilco1}
+   \caption{Information displayed during rollouts}
+  \label{fig:pilcoscreen}
+\end{figure*}
 \subsection{Software}
-The main body of the code is run in Matlab on an attached computer. This code is part of the extensive PILCO toolbox.......
+The main body of the code is run in Matlab on an attached computer. This code is part of the extensive PILCO toolbox, the following steps are required when programming a sceario in PILCO, with each step using the structures and methods defined in the package.
+
+\begin{itemize}
+\item Define all state variables, including policy and dynamics inputs and outputs, variables solved for when simulating and which variables correspond to angles
+\item Number of rollouts to optimise policy over 
+\item Number of random rollouts
+\item horizon time
+\item Initial state distribution, including state uncertainties
+\item Policy structure, and optimisation methods
+\item Plant information including simulation dynamics
+\item Controller structure
+\item Dynamics function structure and optimisation
+\item Cost function
+\item Optional policy exploration methods
+\item Iterations of learning dynamics from new rollouts, then optimising policy function for use in next rollout can then occur.
+\end{itemize}
+
+
+
+Figure \ref{fig:pilcoscreen} shows the information generated during rollouts. Shown in these plots is.... Additional features such as replaying an animation can be performed by right clicking the desired trajectory line in the GUI \cite{eric}. 
+Log files are generated of each rollout to allow for easy post processing or reusing old data on modified algorithms.
 \newline
 During rollouts sensor readings from the phone were logged and used within Matlab by using a now discontinued feature of Matlab mobile. This feature allowed the connection of a phone and computer logged into the same Matlab account to share data eg sensor readings over wifi.
 \newline
-Position calculations and subsequent policy evaluations were then performed within Matlab to determine the motor input torques. These were called using the following commands:
+Position calculations and subsequent policy evaluations were then performed within Matlab to determine the motor input torques. These were called using the following commands \cite{arsalan}: 
 \begin{itemize}
 \item system(mypi, 'sudo python m/enabling\_motors.py')
 \item system(mypi, 'sudo python m/motor\_contorl\_2.py -240 120')
