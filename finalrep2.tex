@@ -25,7 +25,7 @@
 
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-\linespread{1.25} % Line spacing - Palatino needs more space between lines
+\linespread{1.5} % Line spacing - Palatino needs more space between lines
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 
 \usepackage[english]{babel} % Language hyphenation and typographical rules
@@ -182,14 +182,31 @@ The size of the unicycle posed serious safety risks, both in terms of replacing 
 \newline
 To increase safety a small model unicycle was constructed as in figure \ref{sub:old2}. PILCO was also implemented on the unicycle \cite{pilco}. The increased safety of the smaller unicycle allowed unconstrained motion to be tested more easily. Work began on the miniature unicycle in 2015 by Tukiainen \cite{tuk}. Problems in balancing the unicycle were encountered at this point, with concerns about identifying the cause for problems. In 2017 an overhaul of the software was done by Wieser \cite{eric}, and in 2019 an electrical overhaul by Harris \cite{arsalan}. This was to simplify the system and allow for more accurate troubleshooting. 
 
-
-
-
+\begin{figure*}[t!]
+  \centering
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth,height=7.5cm]{other1}
+   \caption{\cite{other1}}
+  \label{sub:oother1}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth,height=7.5cm]{other3}
+    \caption{\cite{other2}}
+  \label{sub:other2}
+  \end{subfigure}
+  \caption{Other Unicycle designs}
+  \label{fig:otheruni}
+\end{figure*}
 
 %---------------------------
 \subsection{Examples of other unicycles}
+There are numerous examples of other work conducted on balancing robotic unicycles. Many of these involved a large vertical flywheel and use of control theory as seen in figure \ref{fig:otheruni}. Orientating the disk this way improves stability and was therefore quite successful at balancing. The improved stability is due to uncoupling the two torques, meaning that to correct a roll error just the flywheel can be used, and to correct a pitch error the wheel only needs rotating. A combination of both actions is required to fix roll errors on a unicycle with horizontal flywheel.
 
 
+
+There has been work done on unicycles set-up with a horizontal flywheel. \cite{other3}. Vos and Von Flotow analysed a large unicycle and were able to balance to some success. This required multi region control policies to work, and therefore was very complicated.
+\newline
+The robotic unicycles discussed so far have all been developed using traditional control theory. Very few unicycles have been controlled with a machine learning approach. Simulations of a 2D unicycles were successfully balanced \cite{other4} using standard keras and Tensorflow libraries. However, this approach simplifies the problem back to a much easier inverted pendulum, and didn't deal with the problems associated with real models. The lack of previous success at this particular task highlights its difficulty.
 
 %------------------------------------------------
 \clearpage
@@ -747,6 +764,24 @@ Arsalan Harris. ''Robotic Unicycle'' . MEng Thesis. CUED. 2019
 \bibitem{ianovir} 
 Ianovir: HyperIMU app 
 \url{ianovir.com/works/mobile/hyperimu/}
+
+\bibitem{other1}
+mhexrobot. 2012. \url{https://edgetriggered.wordpress.com/category/unicycle-robot/}
+
+\bibitem{other2}
+G. Daoxiong, P. Qi, Z. Guoyu, and L. Xinghui, ''Lqr control for a self-balancing unicycle
+robot on inclined plane''. 2012.
+
+\bibitem{other3}
+D. W. Vos and A. H. Von Flotow, ''Dynamics and nonlinear adaptive control of an
+autonomous unicycle: Theory and experiment,'' in 29th IEEE Conference on Decision
+and Control, pp. 182{187, IEEE, 1990.}
+
+\bibitem{other4}
+Matthew Davis. 2019 \url{https://www.mdavis.xyz/unicycle/}
+
+
+
 
 \end{thebibliography}
 
