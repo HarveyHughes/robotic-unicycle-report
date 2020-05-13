@@ -356,16 +356,30 @@ c(\textbf{x}) = 1 - \mathcal{R}(\textbf{x}) \\
   \caption{Current set-up of unicycle}
   \label{fig:current}
 \end{figure*}
-
+need to label the images and probs make them bigger?
 
 \section{Current Unicycle Set-up}
 
 
 \subsection{Mechanical}
-
-
-
+Figure \ref{sub:frameold} shows the mechanical design of the unicycle. The unicycle was built from PCB boards made of copper coated fibreglass and subsequently welded together. This material was very light and stiff and helped keep the overall weight to about 1.2kg. The unicycle stands at 20cm tall in real life.
+\newline
+Two identical motors are used on the unicycle, these are Maxon ..... \cite{maxonmotor}. These motors have maximum continuous torques of 6.31mNm and speeds of ....rpm. These motors run fast so to improve sensitivity and increase torque output a 14:1 planetary gearhead \cite{gearhead} is attached to each motor. To further increase torque output on the wheel a gearing of 40:16 is implemented via a belt. This results in maximum output torques of the motors as 0.205Nm and 0.513Nm for the turntable and wheel respectively. Each motor has an attached encoder which pulses 512 times per revolution, this can be used to accurately track the motor positions but is currently not in use.
+\newline
+The flywheel of the unicycle is mounted horizontally and cased within the frame to prevent injury and damage to the motors.
+\newline
+To prevent damage to the unicycle when falling a basic protection of foam was added to the unicycle. The unicycle currently crashed when a roll angle of $17^{\circ}$ or pitch of $75^{\circ}$ is achieved. 
 \subsection{Electrical}
+The electrical components on the unicycle was simplified by Harris \cite{arsalan} to only involve a phone, Raspberry Pi and Raspberry Pi motor board. 
+
+
+use of each component
+
+attachment of each component
+
+complicated rollout setup
+
+
 \subsection{Software}
 
 An Android phone is used as the gyroscope and accelerometer for reading the current state. The sensor data is transmitted from the phone to a computer running the policy script before the required action is transmitted to a raspberry pi to controls the motors.
