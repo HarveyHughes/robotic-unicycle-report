@@ -358,9 +358,7 @@ c(\textbf{x}) = 1 - \mathcal{R}(\textbf{x}) \\
 \end{figure*}
 need to label the images and probs make them bigger?
 
-\section{Current Unicycle Set-up}
-
-
+\section{Current Unicycle Set-up Review}
 \subsection{Mechanical}
 Figure \ref{sub:frameold} shows the mechanical design of the unicycle. The unicycle was built from PCB boards made of copper coated fibreglass and subsequently welded together. This material was very light and stiff and helped keep the overall weight to about 1.2kg. The unicycle stands at 20cm tall in real life.
 \newline
@@ -370,20 +368,25 @@ The flywheel of the unicycle is mounted horizontally and cased within the frame 
 \newline
 To prevent damage to the unicycle when falling a basic protection of foam was added to the unicycle. The unicycle currently crashed when a roll angle of $17^{\circ}$ or pitch of $75^{\circ}$ is achieved. 
 \subsection{Electrical}
-The electrical components on the unicycle was simplified by Harris \cite{arsalan} to only involve a phone, Raspberry Pi and Raspberry Pi motor board. 
-
-
-use of each component
-
-attachment of each component
-
-complicated rollout setup
-
-
+The electrical components on the unicycle was simplified by Harris \cite{arsalan} to only involve a phone, Raspberry Pi and Raspberry Pi motor board. This simplification was to reduce the number of components required to be brought together for successful rollouts, helping reduce complexity and increase ease of troubleshooting. 
+\newline
+The phone is used to take advantage of high quality sensors existing in a device most people own. The on-board gyroscope is used to measure the current state, with the possibility of using the other sensors such as accelerometer to calculate initial position. 
+\newline
+The Rasberry Pi is used to control the motor torques via the attached motor board. This replaced a normal micro controller and was chosen to allow future adaptability in design as a Raspberry Pi has lots of additional functionality over a micro controller.
+\newline
+The phone and Pi were unreliability attached using rubber bands. This introduced lots of additional noise as the sensor could move between rollouts or during a rollout, therefore effecting the generalisation of learnt dynamics to all rollouts. To minimise this problem the phone was realigned by attaching and reattaching before each trial. 
 \subsection{Software}
-
-An Android phone is used as the gyroscope and accelerometer for reading the current state. The sensor data is transmitted from the phone to a computer running the policy script before the required action is transmitted to a raspberry pi to controls the motors.
-
+The main body of the code is run in Matlab on an attached computer. This code is part of the extensive PILCO toolbox.......
+\newline
+During rollouts sensor readings from the phone were logged and used within Matlab by using a now discontinued feature of Matlab mobile. This feature allowed the connection of a phone and computer logged into the same Matlab account to share data eg sensor readings over wifi.
+\newline
+Position calculations and subsequent policy evaluations were then performed within Matlab to determine the motor input torques. These were called using the following commands:
+\begin{itemize}
+\item system(mypi, 'sudo python m/enabling\_motors.py')
+\item system(mypi, 'sudo python m/motor\_contorl\_2.py -240 120')
+\item system(mypi, 'sudo python m/disabling\_motors.py')
+\end{itemize}
+These commands opened a command terminal on the Pi through Matlabs integration to Pi package. In this terminal python files could then be executed to turn motors on/off, or change speeds.
 %----------------------------------
 
 \clearpage
@@ -418,7 +421,7 @@ Two different measures will be used to determine success. The first being time u
   \caption{Simulating the effect of roll limit $\theta_{max}$ }
   \label{fig:rolllimit}
 \end{figure*}
-The first factor that would determine the benefit of a large mechanical redesign is the roll limit. In the unicycle model the roll angle cannot exceed 17 degrees. This is thought to inhibit learning as initially the system can't balance and will hit this limit within very few time steps. This could mean the model has insufficient data to successfully learn a policy. Futhermore as the last measurment is removed in real trials due to high accelerations the data available is reduced more. This reduction will have a larger effect on small roll limts and can cause failure to appear to happen at a low cost. Which could in turn inhibit learning more.
+The first factor that would determine the benefit of a large mechanical redesign is the roll limit. In the unicycle model the roll angle cannot exceed 17 degrees. This is thought to inhibit learning as initially the system can't balance and will hit this limit within very few time steps. This could mean the model has insufficient data to successfully learn a policy. Furthermore as the last measurement is removed in real trials due to high accelerations the data available is reduced more. This reduction will have a larger effect on small roll limits and can cause failure to appear to happen at a low cost. Which could in turn inhibit learning more.
 \newline
 Several designs were sketched to change the roll limit. 42 degrees could be achieved with a new chassis and the same gears, and 47 degrees by changing an additional bracket. Simulations of these can be seen in figure \ref{fig:rolllimit}.
 \newline

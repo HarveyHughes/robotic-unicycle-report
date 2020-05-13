@@ -10,38 +10,38 @@
 \contentsline {subsection}{\numberline {iv}PILCO}{10}{subsection.2.4}
 \contentsline {subsection}{\numberline {v}Gaussian Processes}{10}{subsection.2.5}
 \contentsline {subsection}{\numberline {vi}Cost Function}{11}{subsection.2.6}
-\contentsline {section}{\numberline {III}Current Unicycle Set-up}{12}{section.3}
+\contentsline {section}{\numberline {III}Current Unicycle Set-up Review}{12}{section.3}
 \contentsline {subsection}{\numberline {i}Mechanical}{12}{subsection.3.1}
 \contentsline {subsection}{\numberline {ii}Electrical}{13}{subsection.3.2}
 \contentsline {subsection}{\numberline {iii}Software}{13}{subsection.3.3}
-\contentsline {section}{\numberline {IV}Initial Simulation Results}{14}{section.4}
-\contentsline {subsection}{\numberline {i}Test Procedure}{14}{subsection.4.1}
-\contentsline {subsection}{\numberline {ii}Roll Limit}{14}{subsection.4.2}
-\contentsline {subsection}{\numberline {iii}Sampling Time}{15}{subsection.4.3}
-\contentsline {subsection}{\numberline {iv}Wheel Size}{16}{subsection.4.4}
-\contentsline {subsection}{\numberline {v}Future Simulations}{16}{subsection.4.5}
-\contentsline {section}{\numberline {V}Mechanical redesign}{17}{section.5}
-\contentsline {subsection}{\numberline {i}Changes}{17}{subsection.5.1}
-\contentsline {subsection}{\numberline {ii}Concerns}{17}{subsection.5.2}
-\contentsline {section}{\numberline {VI}Results}{19}{section.6}
-\contentsline {subsection}{\numberline {i}Phone}{19}{subsection.6.1}
-\contentsline {subsubsection}{\numberline {i.1}Connection}{19}{subsubsection.6.1.1}
-\contentsline {subsubsection}{\numberline {i.2}Orientation}{20}{subsubsection.6.1.2}
-\contentsline {subsection}{\numberline {ii}Rasberry Pi}{21}{subsection.6.2}
-\contentsline {subsubsection}{\numberline {ii.1}Connection}{21}{subsubsection.6.2.1}
-\contentsline {subsection}{\numberline {iii}Motor}{21}{subsection.6.3}
-\contentsline {subsection}{\numberline {iv}Rollouts}{21}{subsection.6.4}
-\contentsline {subsubsection}{\numberline {iv.1}Test Procedure}{23}{subsubsection.6.4.1}
-\contentsline {subsubsection}{\numberline {iv.2}Functions}{25}{subsubsection.6.4.2}
-\contentsline {subsubsection}{\numberline {iv.3}Tests}{25}{subsubsection.6.4.3}
-\contentsline {subsection}{\numberline {v}Quadratic Controller}{25}{subsection.6.5}
-\contentsline {subsection}{\numberline {vi}Additional Simulations}{25}{subsection.6.6}
-\contentsline {section}{\numberline {VII}Conclusions}{26}{section.7}
-\contentsline {subsection}{\numberline {i}Progress}{26}{subsection.7.1}
-\contentsline {subsection}{\numberline {ii}Future Work}{26}{subsection.7.2}
-\contentsline {subsection}{\numberline {iii}Additional rollouts}{26}{subsection.7.3}
-\contentsline {subsection}{\numberline {iv}Encoder}{26}{subsection.7.4}
-\contentsline {subsection}{\numberline {v}Exploration}{26}{subsection.7.5}
-\contentsline {subsection}{\numberline {vi}Mass adjustment}{26}{subsection.7.6}
-\contentsline {section}{\numberline {VIII}Appendix}{28}{section.8}
-\contentsline {subsection}{\numberline {i}Risk Assessment Review}{28}{subsection.8.1}
+\contentsline {section}{\numberline {IV}Initial Simulation Results}{15}{section.4}
+\contentsline {subsection}{\numberline {i}Test Procedure}{15}{subsection.4.1}
+\contentsline {subsection}{\numberline {ii}Roll Limit}{15}{subsection.4.2}
+\contentsline {subsection}{\numberline {iii}Sampling Time}{16}{subsection.4.3}
+\contentsline {subsection}{\numberline {iv}Wheel Size}{17}{subsection.4.4}
+\contentsline {subsection}{\numberline {v}Future Simulations}{17}{subsection.4.5}
+\contentsline {section}{\numberline {V}Mechanical redesign}{18}{section.5}
+\contentsline {subsection}{\numberline {i}Changes}{18}{subsection.5.1}
+\contentsline {subsection}{\numberline {ii}Concerns}{18}{subsection.5.2}
+\contentsline {section}{\numberline {VI}Results}{20}{section.6}
+\contentsline {subsection}{\numberline {i}Phone}{20}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {i.1}Connection}{20}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {i.2}Orientation}{21}{subsubsection.6.1.2}
+\contentsline {subsection}{\numberline {ii}Rasberry Pi}{22}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {ii.1}Connection}{22}{subsubsection.6.2.1}
+\contentsline {subsection}{\numberline {iii}Motor}{22}{subsection.6.3}
+\contentsline {subsection}{\numberline {iv}Rollouts}{22}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {iv.1}Test Procedure}{24}{subsubsection.6.4.1}
+\contentsline {subsubsection}{\numberline {iv.2}Functions}{26}{subsubsection.6.4.2}
+\contentsline {subsubsection}{\numberline {iv.3}Tests}{26}{subsubsection.6.4.3}
+\contentsline {subsection}{\numberline {v}Quadratic Controller}{26}{subsection.6.5}
+\contentsline {subsection}{\numberline {vi}Additional Simulations}{26}{subsection.6.6}
+\contentsline {section}{\numberline {VII}Conclusions}{27}{section.7}
+\contentsline {subsection}{\numberline {i}Progress}{27}{subsection.7.1}
+\contentsline {subsection}{\numberline {ii}Future Work}{27}{subsection.7.2}
+\contentsline {subsection}{\numberline {iii}Additional rollouts}{27}{subsection.7.3}
+\contentsline {subsection}{\numberline {iv}Encoder}{27}{subsection.7.4}
+\contentsline {subsection}{\numberline {v}Exploration}{27}{subsection.7.5}
+\contentsline {subsection}{\numberline {vi}Mass adjustment}{27}{subsection.7.6}
+\contentsline {section}{\numberline {VIII}Appendix}{29}{section.8}
+\contentsline {subsection}{\numberline {i}Risk Assessment Review}{29}{subsection.8.1}
