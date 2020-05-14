@@ -382,7 +382,7 @@ The phone and Pi were unreliability attached using rubber bands. This introduced
   \label{fig:pilcoscreen}
 \end{figure*}
 \subsection{Software}
-The main body of the code is run in Matlab on an attached computer. This code is part of the extensive PILCO toolbox, the following steps are required when programming a sceario in PILCO, with each step using the structures and methods defined in the package.
+The main body of the code is run in Matlab on an attached computer. This code is part of the extensive PILCO toolbox, the following steps are required when programming a scenario in PILCO, with each step using the structures and methods defined in the package.
 
 \begin{itemize}
 \item Define all state variables, including policy and dynamics inputs and outputs, variables solved for when simulating and which variables correspond to angles
@@ -401,7 +401,7 @@ The main body of the code is run in Matlab on an attached computer. This code is
 
 
 
-Figure \ref{fig:pilcoscreen} shows the information generated during rollouts. Shown in these plots is.... Additional features such as replaying an animation can be performed by right clicking the desired trajectory line in the GUI \cite{eric}. 
+Figure \ref{fig:pilcoscreen} shows the information generated during rollouts. Shown in these plots is the states, loss, unicycle animation, and policy improvements across rollouts. The state window shows the trajectory of 10 rollouts under the current policy, with the rollout used in training displayed in green. The predictive state uncertainty and mean is displayed in light blue, with the dark blue indicating an updated prediction after re optimising the dynamics function using the new data. Multiple rollouts are displayed to get a better idea about the behaviours exhibited by the controller, and to check the chosen rollout is typical. The loss window shows the same 10 rollouts and the cost distribution expected at each timestep. The animation displays the unicycle trajectory and traced path for the green rollout, the current actions and cost is also displayed. Policy learning can be analysed by looking at the policy window. This displays the expected loss, optimized 100 times, for each policy iteration. A horizontal line, or grouping of consecutive policy lines can indicate a reduction in learning rate. Often when little data has been observed the trajectory predictions can be overly optimistic, causing the predicted loss decrease rapidly in some iterations. This prediction is later reverted once more data has been observed.   Additional features such as replaying an animation can be performed by right clicking the desired trajectory line in the GUI, described in detail in by Weiser \cite{eric}. 
 Log files are generated of each rollout to allow for easy post processing or reusing old data on modified algorithms.
 \newline
 During rollouts sensor readings from the phone were logged and used within Matlab by using a now discontinued feature of Matlab mobile. This feature allowed the connection of a phone and computer logged into the same Matlab account to share data eg sensor readings over wifi.
@@ -497,7 +497,7 @@ Additional factors are to be simulated to determine the variables that effect le
 %---------------------------------------
 \clearpage
 
-\begin{figure*}[t!]
+\begin{figure*}[ht!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{frontnew}
@@ -531,10 +531,104 @@ Additional factors are to be simulated to determine the variables that effect le
   \label{fig:new}
 \end{figure*}
 
+\begin{figure*}[t!]
+  \centering
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth]{frontnew}
+   \caption{Front}
+  \label{sub:frontnew}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth]{sidenew}
+    \caption{Side}
+  \label{sub:sidenew}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth]{backnew}
+    \caption{Back}
+  \label{sub:backnew}
+  \end{subfigure}
+  \newline
+  
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth]{botnew}
+    \caption{Bottom}
+  \label{sub:botnew}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+    \includegraphics[width=\linewidth]{topnew}
+    \caption{Top}
+  \label{sub:topnew}
+  \end{subfigure}
+  
+  \caption{Drawings of new unicycle design}
+  \label{fig:drawings}
+\end{figure*}
+\clearpage
 \section{Mechanical redesign}
+Speculations from previous years and simulations results conducted indicated that the unicycle was unable to learn to balance with a roll limit of 17 degrees. This prompted the need for a new unicycle design pictured in figure \ref{fig:new} and \ref{fig:drawings}. In order to allow for a good design the following principles were adopted:
 
+\begin{itemize}
+\item Replace welding with bolts, to allow for easy part replacement if required in future
+\item Maintain rigidity with the use of bolts
+\item Keep parts as simple as possible
+\item Allow for variation in parts eg phone size
+\end{itemize}
 
 \subsection{Changes}
+\subsubsection{Roll limit}
+From simulations it was shown that increasing the roll limit to $47^{\circ}$ was required to allow policy learning. Increasing the limit much further simulations deemed unnecessary.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=\linewidth]{all3}
+  \caption{New design for higher roll limit}
+  \label{fig:newline}
+\end{figure}
+
+Figure \ref{fig:newline} shows a comparison between the old $17^{\circ}$ design and new $47^{\circ}$ design. This was made possible using mostly the same parts from the original design, with the exception of bearings. This was to maintain the gear ratio shown to be effective, and to reduces the need to source new parts that would make very marginal differences. 
+\newline
+The first step to increasing roll limit was to bring the gears and motors as central as possible. This required decentralising the motor position and therefore CoM. The unicycle should still be able to learn with an off-centre design, however this would still be corrected for with later part placement. Once all the parts had been centralised it was found that the roll limit was $42^{\circ}$ with the axle bracket the limiting factor. 
+\newline
+Three steps were implemented to reduce this limit. Reduce size of bearing holder, use smaller 10x6mm bearing, and minimise size of axle mount. These changes allowed the roll limit to become $47^{\circ}$ as desired.
+%--------------------------------------
+\begin{table*}[ht!]
+\centering
+\begin{tabular}{ c | c | c | c }
+Design& Summary & USB-C & Total\\ 
+\midrule
+1&&1.05 &3.02\\
+2&& 1.26&1.25\\
+3&&1.02 &1.84\\
+\end{tabular}
+\caption{Protection system analysis}
+\label{tab:pro}
+\end{table*}
+
+\subsubsection{Protection}
+The next problem to solve was protecting the unicycle was the many falls it would experience. To be effective this would need to decelerate the unicycle at a slow rate, be easy to attach and fix if damaged, be mounted to not decrease the roll limit by too much.
+\newline
+Three designs were proposed an evaluation of which can be seen in table \ref{tab:pro}. Design 1 consisted of a static material eg rubber or foam being attached, design 2 was a large ring attached to the main chassis by springs, and design 3 was an inflated inner tube. The design that proved to be the most effective at achieving the initial aims was a static material damper. This was due to its simplicity and ease of replacement, while still maintaining effectiveness. To decide the material various items were tested by hand. These were rubber tubing, foam insulation tubing, hose pipes, silicon seals. Out of these materials only the foam tubing was the desired stiffness and thickness for the task. The tubing came with the added benefit of being the cheapest and has the option to increase stiffness if required by threading extra material inside it.
+
+\begin{equation}
+d = 
+\label{eq:diskdia}
+\end{equation}
+
+The foam was to be mounted to the horizontal metal disks protecting the flywheel. A roll limit of $45^{\circ}$ was designed for the point of contact on the tube allowing for $2^{\circ}$ of deceleration to occur. This corresponded to a displacement of ....... in the foam. The required disk diameter for mounting was calculated using equation \ref{eq:diskdia}. Where t=26mm is the disk separation, and r=15mm is the foam radius.
+
+%--------------------------------------
+\subsubsection{Mountings}
+The previous method of mounting the phone used elastic bands. This resulted in lengthy repositioning of the phone between trials to minimise the cross trial effect of sensor position change. This introduces a lot of avoidable noise if done incorrectly. The aim was to decrease this variation by providing a secure mounting that was capable of fixing any phone, in case this changed in the future. 
+\newline
+To have reliable and repeatable phone position the attachment must resisting all degrees of freedom and have at least 3 reference planes from phone alignment. Due to these strict requirements and desire for size variability it was decided to use an existing phone mounting system. This would increase part size, but provide the desired functionality without need to fabricate complicated parts. Different bike and car mounts were evaluated with the ...... bike mount eventually chosen \cite{bike}. This mounts onto a handlebar like design at the top of the unicycle as in figure \ref{sub:topnew}. 
+%--------------------------------------
+\subsubsection{Material}
+A copper coated fibre glass was used previously, as it had high stiffness but low weight. Due to designing within solidworks and requiring some machined parts the EDG office who manufactured the parts last time were unable to help again. Therefore a change in material was required to 1.6mm plate aluminium, with the manufacturing done in the Dyson centre workshop. This ensured that the frame would be stiff enough to limit unwanted vibrations without adding too much weight. 
+
+%--------------------------------------
+\subsection{Design Evaluation}
+
 
 %--------------------------------------
 \subsection{Concerns}
