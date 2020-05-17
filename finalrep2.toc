@@ -26,27 +26,27 @@
 \contentsline {subsubsection}{\numberline {i.2}Protection}{22}{subsubsection.5.1.2}
 \contentsline {subsubsection}{\numberline {i.3}Mountings}{23}{subsubsection.5.1.3}
 \contentsline {subsubsection}{\numberline {i.4}Material}{23}{subsubsection.5.1.4}
-\contentsline {subsection}{\numberline {ii}Design Evaluation}{23}{subsection.5.2}
-\contentsline {subsection}{\numberline {iii}Concerns}{23}{subsection.5.3}
-\contentsline {section}{\numberline {VI}Results}{24}{section.6}
-\contentsline {subsection}{\numberline {i}Phone}{24}{subsection.6.1}
-\contentsline {subsubsection}{\numberline {i.1}Connection}{24}{subsubsection.6.1.1}
-\contentsline {subsubsection}{\numberline {i.2}Orientation}{25}{subsubsection.6.1.2}
-\contentsline {subsection}{\numberline {ii}Rasberry Pi}{26}{subsection.6.2}
-\contentsline {subsubsection}{\numberline {ii.1}Connection}{26}{subsubsection.6.2.1}
-\contentsline {subsection}{\numberline {iii}Motor}{26}{subsection.6.3}
-\contentsline {subsection}{\numberline {iv}Rollouts}{26}{subsection.6.4}
-\contentsline {subsubsection}{\numberline {iv.1}Test Procedure}{28}{subsubsection.6.4.1}
-\contentsline {subsubsection}{\numberline {iv.2}Functions}{30}{subsubsection.6.4.2}
-\contentsline {subsubsection}{\numberline {iv.3}Tests}{30}{subsubsection.6.4.3}
-\contentsline {subsection}{\numberline {v}Quadratic Controller}{30}{subsection.6.5}
-\contentsline {subsection}{\numberline {vi}Additional Simulations}{30}{subsection.6.6}
-\contentsline {section}{\numberline {VII}Conclusions}{31}{section.7}
-\contentsline {subsection}{\numberline {i}Progress}{31}{subsection.7.1}
-\contentsline {subsection}{\numberline {ii}Future Work}{31}{subsection.7.2}
-\contentsline {subsection}{\numberline {iii}Additional rollouts}{31}{subsection.7.3}
-\contentsline {subsection}{\numberline {iv}Encoder}{31}{subsection.7.4}
-\contentsline {subsection}{\numberline {v}Exploration}{31}{subsection.7.5}
-\contentsline {subsection}{\numberline {vi}Mass adjustment}{31}{subsection.7.6}
-\contentsline {section}{\numberline {VIII}Appendix}{33}{section.8}
-\contentsline {subsection}{\numberline {i}Risk Assessment Review}{33}{subsection.8.1}
+\contentsline {subsection}{\numberline {ii}Design Evaluation}{24}{subsection.5.2}
+\contentsline {section}{\numberline {VI}Results}{26}{section.6}
+\contentsline {subsection}{\numberline {i}Phone}{26}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {i.1}Connection}{26}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {i.2}Orientation}{27}{subsubsection.6.1.2}
+\contentsline {subsection}{\numberline {ii}Raspberry Pi}{28}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {ii.1}Connection}{28}{subsubsection.6.2.1}
+\contentsline {subsection}{\numberline {iii}Motor}{31}{subsection.6.3}
+\contentsline {subsection}{\numberline {iv}Rollouts}{31}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {iv.1}Test Procedure}{32}{subsubsection.6.4.1}
+\contentsline {subsubsection}{\numberline {iv.2}Functions}{34}{subsubsection.6.4.2}
+\contentsline {subsubsection}{\numberline {iv.3}Tests}{34}{subsubsection.6.4.3}
+\contentsline {subsection}{\numberline {v}Quadratic Controller}{34}{subsection.6.5}
+\contentsline {subsection}{\numberline {vi}Additional Simulations}{34}{subsection.6.6}
+\contentsline {section}{\numberline {VII}Conclusions}{35}{section.7}
+\contentsline {subsection}{\numberline {i}Progress}{35}{subsection.7.1}
+\contentsline {subsection}{\numberline {ii}Future Work}{35}{subsection.7.2}
+\contentsline {subsection}{\numberline {iii}Additional rollouts}{35}{subsection.7.3}
+\contentsline {subsection}{\numberline {iv}Encoder}{35}{subsection.7.4}
+\contentsline {subsection}{\numberline {v}Exploration}{35}{subsection.7.5}
+\contentsline {subsection}{\numberline {vi}Mass adjustment}{35}{subsection.7.6}
+\contentsline {subsection}{\numberline {vii}Removing Matlab from rollouts}{35}{subsection.7.7}
+\contentsline {section}{\numberline {VIII}Appendix}{37}{section.8}
+\contentsline {subsection}{\numberline {i}Risk Assessment Review}{37}{subsection.8.1}

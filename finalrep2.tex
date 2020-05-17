@@ -621,17 +621,24 @@ The foam was to be mounted to the horizontal metal disks protecting the flywheel
 \subsubsection{Mountings}
 The previous method of mounting the phone used elastic bands. This resulted in lengthy repositioning of the phone between trials to minimise the cross trial effect of sensor position change. This introduces a lot of avoidable noise if done incorrectly. The aim was to decrease this variation by providing a secure mounting that was capable of fixing any phone, in case this changed in the future. 
 \newline
-To have reliable and repeatable phone position the attachment must resisting all degrees of freedom and have at least 3 reference planes from phone alignment. Due to these strict requirements and desire for size variability it was decided to use an existing phone mounting system. This would increase part size, but provide the desired functionality without need to fabricate complicated parts. Different bike and car mounts were evaluated with the ...... bike mount eventually chosen \cite{bike}. This mounts onto a handlebar like design at the top of the unicycle as in figure \ref{sub:topnew}. 
+To have reliable and repeatable phone position the attachment must resisting all degrees of freedom and have at least 3 reference planes f phone alignment. Due to these strict requirements and desire for size variability it was decided to use an existing phone mounting system. This would increase part size, but provide the desired functionality without need to fabricate complicated parts. Different bike and car mounts were evaluated with the ...... bike mount eventually chosen \cite{bike}. This mounts onto a handlebar like design at the top of the unicycle as in figure \ref{sub:topnew}. 
+\newline
+The Raspberry Pi was attached using long bolts located on the opposite side to the phone. In addition to the battery these were located slightly off centre, see figure \ref{sub:backnew}. This countered the off centred motor position for the wheel, and successfully brought the CoM to the centre. The Pi was located further away from the central plane of the unicycle then desired, this was due to the inability to find suitably shorter screws, and spacers because of closures due to Covid-19. By shortening these screws the moment of inertia would reduce and could improve unicycle balance.  
 %--------------------------------------
 \subsubsection{Material}
 A copper coated fibre glass was used previously, as it had high stiffness but low weight. Due to designing within solidworks and requiring some machined parts the EDG office who manufactured the parts last time were unable to help again. Therefore a change in material was required to 1.6mm plate aluminium, with the manufacturing done in the Dyson centre workshop. This ensured that the frame would be stiff enough to limit unwanted vibrations without adding too much weight. 
 
 %--------------------------------------
 \subsection{Design Evaluation}
-
+While constructing the unicycle it was apparent that the new design was more rigid and adaptable then the last model. Having the flywheel protection disks made out of one piece, instead of two welded together was the main source of this additional strength. The addition of the bolts also made assembling the model much easier which is promising if future modifications are needed. The most difficult part of assembly was securely attaching the top motor, this was due to the inaccessibility of the screws mounting it. This process was still easier then the last model as ample room had been made to remove the flywheel when the motors attached, allowing more room for tools. Some bolts are currently missing due to the inability to acquire more during the lockdown period of Covid-19. The addition of these bolts and ensuring all bolts are attached tightly is very important for minimising vibrational noise in future test runs.
+\newline
+The attachment of the Pi and phone proved very successful, allowing access to all the ports on both devices. The handle bar was a secure way of attachment and allowed for adequate variation in either phone orientation or size. Due to the mounting towards the top of the unicycle the moment of inertia about the wheel when falling is increased. This doesn't appear to be adversely affecting the unicycle performance as falling isn't happening too fast to react to. To improve this in future when the department is back open, weight could be removed from the inside of the handle bar, or mounting holes could possibly be moved lower down the back plate. This movement would also reduce the vibrations carried up this plate, which add unwanted noise to the sensor readings. Once again this problem doesn't appear to be too large and much easier methods of reduction could be implemented such as stiffeners attached to the plate edges.
+\newline
+The foam protection ring proved to be very effective. Roll angle was only marginally reduced as calculated, and the unicycle is able to safely fall without supervision. This part can easily be replaced by simply buying a new tube \cite{foam} and 7 cable ties.
+\newline
+Due to a change in material and slightly increase in size the overall weight of the unicycle was increased from 1.2kg to 1.5kg. This change hasn't been shown to adversely effect performance yet. However, there is a slight worry that with this increased weight and moment of inertia the current motors and 200g flywheel will be too small to quickly correct the unicycle yaw and roll. If this proved problematic the easiest change would be to introduce a larger flywheel as there is room in the casing.  
 
 %--------------------------------------
-\subsection{Concerns}
 
 %--------------------------------
 \clearpage
@@ -734,7 +741,7 @@ A rotation about axis (x,y,z) by $\alpha$ can be defined using the following uni
 \textbf{q}_{new} = \textbf{q}_{old} . \textbf{q} \nonumber
 \end{gather}
   
-\subsection{Rasberry Pi}
+\subsection{Raspberry Pi}
 \subsubsection{Connection}
 
 \begin{figure*}[t]
@@ -757,6 +764,41 @@ A rotation about axis (x,y,z) by $\alpha$ can be defined using the following uni
   \caption{Testing connecting from Matlab to Pi using Matlab system command}
   \label{fig:pi}
 \end{figure*}
+Connection to the Raspberry Pi is done using the matlab support package for Pi devices \cite{pi}. An initial set-up is required for this package. This involves connecting the Pi using a Ethernet cable, and following the package installation guide using the Raspberry Pi 3 Matlab image. Once set up the following command can be run in Matlab:
+
+\begin{gather}
+mypi = raspi('169.254.0.2', 'pi', 'raspberry') 
+\end{gather}
+
+This assigns the connection to the variable mypi, using the default IP address, username and password. This connection can then be used to send commands to the Pi:
+\begin{gather}
+system(mypi, 'sudo \: python \: m/filename.py')
+\end{gather}
+This command opens a terminal on the Rasbian OS on the Pi and runs the python file specified. Three files were used \cite{motor} "enabling\_motors" , "motor\_control\_2" and "disabling\_motors". These turned on, set motor speed and turned off the motors respectively.
+\newline
+During testing it became apparent that there was a high degree of variation in changes to motor speed. This is unwanted because it introduces error to the dynamic model which predicts for a constant timestep. If this variation also resulted in larger timesteps then 50ms the learning ability would be drastically reduced as less data is record initially, and the dynamics are more non linear and harder to model. Figure \ref{fig:pi} shows this varition occuring when controlling the motors, for a number of different timesteps. The first few recordings took longer in each test. the execution time then settled to be at minium 100ms, with some spikes up to 160ms. This meant that lots of sensor readings weren't being processed.
+\newline
+The cause of this delay was found to be the Matlab system command. This command waits for a completed message to be returned before the Matlab script proceeds. And due to the command requiring opening a new terminal, and python file each time it took at minimum 90ms. Possible soultions were tested to avoid this; adding '\&' at the end of a command stops the script waiting for a reply, hwoever this is incompatible when executed through a Pi. The command was also ran as a batch as a sub process, this allowed the script the proceed without delay but didnt succesfuly control the motors. 
+\newline
+The implemented solution looked to minimise the need to open a new python script and terminal for each change in motor speed. For this to be implemented UDP was once again used to send motor commands. A script is ran for the duration of the rollout on the Pi, this listens to a UDP port and actions any commands sent. To initiate this command and avoid the need to wait for a responce an alternative to the system command was used:
+
+\begin{gather}
+command to open a ssh window
+\end{gather}
+
+This opens a SSH connection to the Pi and a terminal on the computer. The following command is then run in this window to initiate listening on the Pi:
+
+\begin{gather}
+sudo python m/...... 
+\end{gather}
+
+The terminal confirms a live connection and displays motor commands sent using the following format:
+
+\begin{gather}
+file format
+\end{gather}
+
+The script is terminated by sending \# in this command.
 
 \begin{figure}
   \centering
@@ -764,7 +806,9 @@ A rotation about axis (x,y,z) by $\alpha$ can be defined using the following uni
   \caption{Testing connection to Pi sending torques by UDP}
   \label{fig:piudp}
 \end{figure} 
-  
+
+Figure \ref{fig:piudp} shows the success this method has at bringing the timestep to the desired length. Problems still occur for the initial commands which take twice as long, this was fixed by optimising the rollout loop in Matlab ensuring variables are initiated beforehand, thus decreasing the yellow line.  
+
 %----------------------------------
 \subsection{Motor}
 maybe something about calculating righting angles? and stiff
@@ -807,18 +851,18 @@ maybe something about calculating righting angles? and stiff
 \begin{itemize}
 \item Turn on USB tethering in the phones settings (settings/network and internet/hotspot and tethering). This often works more reliably with the phone in aeroplane mode
 \item Find the ipv4 address of the attached computer. on windows this is found by typing ipconfig into a command window
-\item Open HyperIMU on the phone and go to settings and enter the ipv4 address, port 5555 and desired sample rate(this is often 1ms too slow) as figure \ref{fig:imuset}
+\item Open HyperIMU on the phone and go to settings and enter the ipv4 address, port 5555 and desired sample rate(this is often 1ms too slow) as in figure \ref{fig:imuset}
 \item Save these settings and click start logging from HyperIMU
 \end{itemize}
 \textbf{Rollouts}
 \begin{itemize}
 \item In an open flat space position the unicycle, run "doitreal.m" script from the connected computer
-\item After initialisation a key press is required to initiate a rollout
+\item A ssh window from the computer to the Pi will then open. Typing the command "sudo python m/...... " will initiate listening mode on the Pi, and display all motor torques and time between subsequent messages
 \item Make sure that the unicycle is being held still and vertical at this point, holding onto the string improves repeatability and release smoothness as in figure \ref{fig:unirel}
 \item The orientation is then measured for a few seconds before the motors start, at this point let go
 \item After the unicycle has fallen the motors should terminate, and confirmation of a successful rollout is required in Matlab 
 \item Policy optimisation and dynamics learning then ensues, the unicycle could be disconnected during this step
-\item this is repeated until the desired rollouts are completed
+\item This is repeated until the desired rollouts are completed
 \end{itemize}
 
 \twocolumn
@@ -862,6 +906,10 @@ After the further simulations has been performed and evaluated the following cha
 
 
 \subsection{Mass adjustment}
+
+
+\subsection{Removing Matlab from rollouts}
+
 
 %----------------------------
 
@@ -917,7 +965,11 @@ and Control, pp. 182{187, IEEE, 1990.}
 \bibitem{other4}
 Matthew Davis. 2019 \url{https://www.mdavis.xyz/unicycle/}
 
+\bibitem{foam}
 
+\bibitem{pi}
+
+\bibitem{motorcmd}
 
 
 \end{thebibliography}
