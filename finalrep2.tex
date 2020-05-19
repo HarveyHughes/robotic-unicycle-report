@@ -916,6 +916,30 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 
 %---------------------------------
 \subsection{Quadratic Controller}
+All simulations and rollouts conducted so far have used a linear policy control function to determine the best action from the current state as in equation \ref{eq:lin}. There is the question of weather a linear policy is sufficient to control a unicycle. A quadratic policy of the form of equation \ref{eq:quad} may be more suitable.
+\begin{equation}
+\pi (\textbf{x}) = \textbf{Wx}+\textbf{p}
+\label{eq:lin}
+\end{equation}
+
+
+
+\begin{figure*}
+  \centering
+    \includegraphics[width=\linewidth]{50ms_udp}
+  \caption{Testing connection to Pi sending torques by UDP}
+  \label{fig:quad}
+\end{figure*} 
+Figure \ref{fig:quad} depicts the ideal action to be taken for the state space covered by [$\theta ,\psi_f$]. This ideal action is the action which minimises the distance or angle moved in that direction to return the unicycle to the desired position of [$\theta ,\psi_f$] = [0,0]. 
+\newline
+To correct pitch a linear policy is clearly sufficient. When the unicycle tilts forward a negative torque on the wheel is desired, and vice versa for backwards tilt. However, when looking at correcting both pitch and roll a quadratic policy appears to be required. This can be easily visualised as the flywheel rotating away from the vertical axis within each quadrant. The vertical axis corresponds to a correcting in just pitch which is linear, so a torque away from this position results in the unicycle moving towards it. This means that the direction of torque required on the flywheel alternates between each quadrant, and is effectively an XOR problem. \cite{rodrigo} 
+\begin{equation}
+\pi (\textbf{x}) = \textbf{x}^T\textbf{Qx} + \textbf{Wx} + \textbf{p}
+\label{eq:quad}
+\end{equation}
+Upon further thought this may not be a problem. The optimal solution may be quadratic but by rotating the other direction the same axis where only pitch is being corrected can be achieved. This can involve a much larger angle of up to $180^{\circ}$ to work. When roll is small the two directions become more similar, and therefore shouldn't pose a problem for most states the unicycle will visit. This non optimal route allows a linear policy to work where two quadrants have the optimal torque direction and two have the sub-optimal direction. Weiser believed that with a linear controller the unicycle learnt to either always fall forward or backwards in order to remain in the optimal regions. \cite{eric}
+\newline
+Testing using quadratic policies could be tested in future to allow an exact evaluation of using a linear approximation. This approximation is useful because the policy parameters optimised over are greatly reduced in a linear model. Therefore training speed is far quicker.
 
 %----------------------
 \subsection{Additional Simulations}

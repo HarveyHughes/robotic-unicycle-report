@@ -39,14 +39,14 @@
 \contentsline {subsubsection}{\numberline {iii.2}Functions}{34}{subsubsection.6.3.2}
 \contentsline {subsubsection}{\numberline {iii.3}Tests}{34}{subsubsection.6.3.3}
 \contentsline {subsection}{\numberline {iv}Quadratic Controller}{34}{subsection.6.4}
-\contentsline {subsection}{\numberline {v}Additional Simulations}{34}{subsection.6.5}
-\contentsline {section}{\numberline {VII}Conclusions}{35}{section.7}
-\contentsline {subsection}{\numberline {i}Progress}{35}{subsection.7.1}
-\contentsline {subsection}{\numberline {ii}Future Work}{35}{subsection.7.2}
-\contentsline {subsection}{\numberline {iii}Additional rollouts}{35}{subsection.7.3}
-\contentsline {subsection}{\numberline {iv}Encoder}{35}{subsection.7.4}
-\contentsline {subsection}{\numberline {v}Exploration}{35}{subsection.7.5}
-\contentsline {subsection}{\numberline {vi}Mass adjustment}{35}{subsection.7.6}
-\contentsline {subsection}{\numberline {vii}Removing Matlab from rollouts}{35}{subsection.7.7}
-\contentsline {section}{\numberline {VIII}Appendix}{38}{section.8}
-\contentsline {subsection}{\numberline {i}Risk Assessment Review}{38}{subsection.8.1}
+\contentsline {subsection}{\numberline {v}Additional Simulations}{36}{subsection.6.5}
+\contentsline {section}{\numberline {VII}Conclusions}{37}{section.7}
+\contentsline {subsection}{\numberline {i}Progress}{37}{subsection.7.1}
+\contentsline {subsection}{\numberline {ii}Future Work}{37}{subsection.7.2}
+\contentsline {subsection}{\numberline {iii}Additional rollouts}{37}{subsection.7.3}
+\contentsline {subsection}{\numberline {iv}Encoder}{37}{subsection.7.4}
+\contentsline {subsection}{\numberline {v}Exploration}{37}{subsection.7.5}
+\contentsline {subsection}{\numberline {vi}Mass adjustment}{37}{subsection.7.6}
+\contentsline {subsection}{\numberline {vii}Removing Matlab from rollouts}{37}{subsection.7.7}
+\contentsline {section}{\numberline {VIII}Appendix}{40}{section.8}
+\contentsline {subsection}{\numberline {i}Risk Assessment Review}{40}{subsection.8.1}
