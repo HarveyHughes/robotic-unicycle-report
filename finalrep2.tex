@@ -627,6 +627,47 @@ The Raspberry Pi was attached using long bolts located on the opposite side to t
 %--------------------------------------
 \subsubsection{Material}
 A copper coated fibre glass was used previously, as it had high stiffness but low weight. Due to designing within solidworks and requiring some machined parts the EDG office who manufactured the parts last time were unable to help again. Therefore a change in material was required to 1.6mm plate aluminium, with the manufacturing done in the Dyson centre workshop. This ensured that the frame would be stiff enough to limit unwanted vibrations without adding too much weight. 
+\subsection{Inertia}
+\begin{table*}[ht!]
+\centering
+\begin{tabular}{ c | c | c | c | c | c | c | c | c | c | c }
+&  & &  &  & \multicolumn{3}{c|}{About CoM} & \multicolumn{3}{c}{About ground}\\
+&  & &  &  & \multicolumn{3}{c|}{/ x$10^{-5kgm^2}$} & \multicolumn{3}{c}{/ x$10^{-3}kgm^2$}\\
+Part& Mass/kg & x/m & y/m & z/m & $I_{xx}$ & $I_{yy}$  & $I_{zz}$ & $I_{xx}$ & $I_{yy}$  & $I_{zz}$ \\ 
+\midrule
+Phone & 0.2 & 0.06 & 0.7 & 0.2 & 46 & 8 & 38 & 8.5 & 8.7 & 1.0\\
+Back Plate & 0.12 & 0 & 0 & 0.12 & 60 & 40 & 20 & 2.3 & 2.1 & 20\\
+Disks & 0.1 & 0 & 0 & 0.11 & 19 & 19 & 38 & 2.8 & 2.8 & 0.76\\
+Bot Motor & 0.12 & 0 & 0 & 0.09 & 4.6 & 0.7 & 4.6 & 1.0 & 1.0 & 0.05\\
+Top Motor & 0.12 & 0 & 0 & 0.15 & 4.6 & 4.6 & 0.7 & 2.7 & 2.7 & 0\\
+Axel support & 0.02 & 0 & 0.02 & 0.07 & 0.46 & 2.3 & 1.8 & 0.2 & 0.2 & 0.05\\
+Flywheel & 0.2 & 0 & 0 & 0.11 & 8.1 & 8.1 & 16 & 2.5 & 2.5 & 0.16\\
+Pi + battery & 0.15 & 0.04& 0 & 0.16 & 14 & 8 & 6 & 4.0 & 4.0 & 0.3\\
+Handlebar & 0.067 & 0.015 & 0 & 0.22 & 1.3 & 12 & 1.3 & 3.2 & 3.3 & 0.3\\
+Phone holder & 0.1 & 0.02 & 0 & 0.21 & 4.2 & 2.1 & 2.1 & 4.5 & 4.5 & 0.06\\
+\midrule
+\textbf{Total}
+ &  & &  & 
+ &  &  &  & 31.7 & 32.1 & 2.64\\
+\end{tabular}
+\caption{Moment of Inertia estimate}
+\label{tab:mot}
+\end{table*}
+
+Table \ref{tab:mot} shows a rough estimation of the moment of inertia of the new unicycle about the group contact point. The estimations involved approximating each part to be a simple object such as planes, disks or cylinders. The using the formula from the mechanics data book the inertia about each parts CoM could be calculated and move by the parallel axis theorem to the contact point. The estimated inertias are 31.7, 32.1 and 2.64 $10^{-3}kgm^2$  for the x,y and z axis respectively. The inertia about the x and y axis are very similar as desired, meaning the unicycle should fall more uniformly in all directions. An estimation on the old unicycle was conducted for $I_{zz}$ \cite{arselan}, Harris assumed the unicycle was a cylinder and then checked his answer using measured angular accelerations. The value Harris calculated was 2.54$x10^{-3}kgm^2$ which is very similar to the new unicycle model.
+\newline
+The inertia about the vertical z axis is 16.4 times that of the flywheel. this means that to conserve angular momentum the flywheel needs to spin this much faster then the maximum rate of change in yaw. The motor has a maximum load speed of 3550rpm, after the 14:1 planetary gear this corresponds to a maximum angular speed of 26.5rad$s^{-1}$. Therefore a correction in yaw of up to 1.6rad$s^{-1}$ or a quarter rotation is expected. This speed seems high enough to enable learning.
+\begin{equation}
+\begin{split}
+T = mgl sin\theta = I\ddot{theta} \\
+ddot{\theta} = \frac{mgl}{I}sin\theta\\
+dot{\theta} = \frac{mgl}{I}sin\theta t + c_1\\
+\theta = \frac{mgl}{2I}sin\theta t^2 + c_1t + c_2\\
+t = \sqrt{\frac{2\theta I}{mglsin\theta}} \\
+\end{split}
+\label{eq:rollt}
+\end{equation}
+The time required for the unicycle to fall without the motor input can be calculated using equations \ref{eq:rollt}. At t=0, $\dot{\theta}$ and $\theta$ = 0. This means that both constants are 0. By assuming the CoM is at l=0.16m and m=1.5kg the time to fall $45^{\circ}$ is calculated to be 1.2 seconds. However, from measuring the unicycle fall this time in reality is nearer to 0.6s. This reduction in time by half is caused by the wheel rolling as the motors were off, therefore reducing I as rotation no longer occurs about the contact point as assumed. While still present during rollouts this change will be less severe as the motors being powered stops them moving freely. This means a falling time between 0.6-1.2s is expected. With a timestep of 50ms this allows 12-24 recordings and commands to be present, even in bad rollouts. This is a large improvement on the last unicycle model which regularly saw around 3 readings before the $17^{\circ}$limit was reached.
 
 %--------------------------------------
 \subsection{Design Evaluation}
@@ -636,7 +677,7 @@ The attachment of the Pi and phone proved very successful, allowing access to al
 \newline
 The foam protection ring proved to be very effective. Roll angle was only marginally reduced as calculated, and the unicycle is able to safely fall without supervision. This part can easily be replaced by simply buying a new tube \cite{foam} and 7 cable ties.
 \newline
-Due to a change in material and slightly increase in size the overall weight of the unicycle was increased from 1.2kg to 1.5kg. This change hasn't been shown to adversely effect performance yet. However, there is a slight worry that with this increased weight and moment of inertia the current motors and 200g flywheel will be too small to quickly correct the unicycle yaw and roll. If this proved problematic the easiest change would be to introduce a larger flywheel as there is room in the casing.  
+Due to a change in material and slightly increase in size the overall weight of the unicycle was increased from 1.2kg to 1.5kg.. Inertia calculations and conducted rollouts show that the increase in weight and inertial still allows for good performance. However, if this proved problematic the easiest change would be to introduce a larger flywheel as there is room in the casing, or reposition the phone mounting. A larger flywheel would help increase yaw and roll adjustments, and moving the phone would reduce the largest contributor to $I_{xx},I_{yy}$ and therefore decrease topple speed.  
 
 %--------------------------------------
 
@@ -774,13 +815,13 @@ This assigns the connection to the variable mypi, using the default IP address, 
 \begin{gather}
 system(mypi, 'sudo \: python \: m/filename.py')
 \end{gather}
-This command opens a terminal on the Rasbian OS on the Pi and runs the python file specified. Three files were used \cite{motor} "enabling\_motors" , "motor\_control\_2" and "disabling\_motors". These turned on, set motor speed and turned off the motors respectively.
+This command opens a terminal on the Rasbian OS on the Pi and runs the python file specified. Three files were used \cite{motorcmd} "enabling\_motors" , "motor\_control\_2" and "disabling\_motors". These turned on, set motor speed and turned off the motors respectively.
 \newline
-During testing it became apparent that there was a high degree of variation in changes to motor speed. This is unwanted because it introduces error to the dynamic model which predicts for a constant timestep. If this variation also resulted in larger timesteps then 50ms the learning ability would be drastically reduced as less data is record initially, and the dynamics are more non linear and harder to model. Figure \ref{fig:pi} shows this varition occuring when controlling the motors, for a number of different timesteps. The first few recordings took longer in each test. the execution time then settled to be at minium 100ms, with some spikes up to 160ms. This meant that lots of sensor readings weren't being processed.
+During testing it became apparent that there was a high degree of variation in changes to motor speed. This is unwanted because it introduces error to the dynamic model which predicts for a constant timestep. If this variation also resulted in larger timesteps then 50ms the learning ability would be drastically reduced as less data is record initially, and the dynamics are more non linear and harder to model. Figure \ref{fig:pi} shows this variation occurring when controlling the motors, for a number of different timesteps. The first few recordings took longer in each test. the execution time then settled to be at minimum 100ms, with some spikes up to 160ms. This meant that lots of sensor readings weren't being processed.
 \newline
-The cause of this delay was found to be the Matlab system command. This command waits for a completed message to be returned before the Matlab script proceeds. And due to the command requiring opening a new terminal, and python file each time it took at minimum 90ms. Possible soultions were tested to avoid this; adding '\&' at the end of a command stops the script waiting for a reply, hwoever this is incompatible when executed through a Pi. The command was also ran as a batch as a sub process, this allowed the script the proceed without delay but didnt succesfuly control the motors. 
+The cause of this delay was found to be the Matlab system command. This command waits for a completed message to be returned before the Matlab script proceeds. And due to the command requiring opening a new terminal, and python file each time it took at minimum 90ms. Possible solutions were tested to avoid this; adding '\&' at the end of a command stops the script waiting for a reply, however this is incompatible when executed through a Pi. The command was also ran as a batch as a sub process, this allowed the script the proceed without delay but didn't successfully control the motors. 
 \newline
-The implemented solution looked to minimise the need to open a new python script and terminal for each change in motor speed. For this to be implemented UDP was once again used to send motor commands. A script is ran for the duration of the rollout on the Pi, this listens to a UDP port and actions any commands sent. To initiate this command and avoid the need to wait for a responce an alternative to the system command was used:
+The implemented solution looked to minimise the need to open a new python script and terminal for each change in motor speed. For this to be implemented UDP was once again used to send motor commands. A script is ran for the duration of the rollout on the Pi, this listens to a UDP port and actions any commands sent. To initiate this command and avoid the need to wait for a response an alternative to the system command was used:
 
 \begin{gather}
 command to open a ssh window
@@ -810,12 +851,11 @@ The script is terminated by sending \# in this command.
 Figure \ref{fig:piudp} shows the success this method has at bringing the timestep to the desired length. Problems still occur for the initial commands which take twice as long, this was fixed by optimising the rollout loop in Matlab ensuring variables are initiated beforehand, thus decreasing the yellow line.  
 
 %----------------------------------
-\subsection{Motor}
-maybe something about calculating righting angles? and stiff
 
 
-\subsection{Rollouts}
+
 \onecolumn
+\subsection{Rollouts}
 \begin{figure*}[t]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
@@ -858,7 +898,7 @@ maybe something about calculating righting angles? and stiff
 \begin{itemize}
 \item In an open flat space position the unicycle, run "doitreal.m" script from the connected computer
 \item A ssh window from the computer to the Pi will then open. Typing the command "sudo python m/...... " will initiate listening mode on the Pi, and display all motor torques and time between subsequent messages
-\item Make sure that the unicycle is being held still and vertical at this point, holding onto the string improves repeatability and release smoothness as in figure \ref{fig:unirel}
+\item Make sure that the unicycle is being held still and vertical at this point, either by holding onto the frame or string as in figure \ref{fig:unirel}
 \item The orientation is then measured for a few seconds before the motors start, at this point let go
 \item After the unicycle has fallen the motors should terminate, and confirmation of a successful rollout is required in Matlab 
 \item Policy optimisation and dynamics learning then ensues, the unicycle could be disconnected during this step
@@ -970,6 +1010,14 @@ Matthew Davis. 2019 \url{https://www.mdavis.xyz/unicycle/}
 \bibitem{pi}
 
 \bibitem{motorcmd}
+
+\bibitem{mount}
+
+\bibitem{motor}
+
+\bibitem{gear}
+
+\bibitem{encoder}
 
 
 \end{thebibliography}
