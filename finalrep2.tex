@@ -109,8 +109,8 @@
 \posttitle{\end{center}} % Article title closing formatting
 \title{Robotic Unicycle} % Article title
 \author{%
-\textsc{Final Report} \\
-\\
+%\textsc{Final Report} \\
+%\\
 \textsc{Harvey Hughes} \\
 \textsc{Supervisor:Professor Carl Rasmussen} \\
 }
@@ -377,7 +377,7 @@ The Rasberry Pi is used to control the motor torques via the attached motor boar
 The phone and Pi were unreliability attached using rubber bands. This introduced lots of additional noise as the sensor could move between rollouts or during a rollout, therefore effecting the generalisation of learnt dynamics to all rollouts. To minimise this problem the phone was realigned by attaching and reattaching before each trial. 
 \begin{figure*}[t!]
   \centering
-    \includegraphics[width=\linewidth]{pilco1}
+    \includegraphics[width=\linewidth]{pilco}
    \caption{Information displayed during rollouts}
   \label{fig:pilcoscreen}
 \end{figure*}
@@ -430,17 +430,17 @@ Two different measures will be used to determine success. The first being time u
 \begin{figure*}[ht!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{a2}
+    \includegraphics[width=\linewidth]{average_angle}
    \caption{Average of six tests}
   \label{fig:a}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{r2}
+    \includegraphics[width=\linewidth]{disp_angle}
     \caption{With $\pm \sigma$}
   \label{fig:sd}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{lossav}
+    \includegraphics[width=\linewidth]{average_angle_loss}
     \caption{Comparing against rollout loss}
   \label{fig:rl}
   \end{subfigure}
@@ -457,6 +457,23 @@ The variation between simulations can be seen in figure \ref{fig:sd} and shows g
 \newline
 Higher roll limits could be achieved by changing other parts. 53 degrees would require a 5mm larger wheel. This change would require evaluating the effect wheel size had on performance as well as roll limit.
 
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[t]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{all_angle}
+   \caption{Vary roll limit}
+  \label{fig:wxro}
+  \end{subfigure}
+  \newline
+  \begin{subfigure}[t]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{all_wheel}
+    \caption{Vary wheel size}
+  \label{fig:exwh}
+  \end{subfigure}
+  \caption{Simulated performance compared to experience time}
+  \label{fig:exti}
+\end{figure}
 %-----------------------------------
 \subsection{Sampling Time}
 Sampling time is another important factor to consider when optimising the training situation of the real unicycle. A faster sampling time effects the following:
@@ -472,7 +489,7 @@ Not enough tests have been simulated yet to fully determine the effect. However,
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=\linewidth]{timestepeffect}
+    \includegraphics[width=\linewidth]{all_ts}
   \caption{Effect of sampling time change}
   \label{fig:st}
 \end{figure}
@@ -480,6 +497,12 @@ Figure \ref{fig:st} shows the results of changing timestep for a roll limit of 4
 
 %---------------------------------------------
 \subsection{Wheel Size}
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{disp_wheel}
+  \caption{Effect of wheel size when roll limit is 5=$53^{\circ}$}
+  \label{fig:whellsi}
+\end{figure}
 
 %--------------------------------
 \subsection{Future Simulations}
@@ -599,7 +622,7 @@ From simulations it was shown that increasing the roll limit to $47^{\circ}$ was
 
 \begin{figure}
   \centering
-    \includegraphics[width=\linewidth]{all3}
+    \includegraphics[width=\linewidth]{place}
   \caption{New design for higher roll limit}
   \label{fig:newline}
 \end{figure}
@@ -677,8 +700,8 @@ Table \ref{tab:mot} shows a rough estimation of the moment of inertia of the new
 The inertia about the vertical z axis is 16.4 times that of the flywheel. this means that to conserve angular momentum the flywheel needs to spin this much faster then the maximum rate of change in yaw. The motor has a maximum load speed of 3550rpm, after the 14:1 planetary gear this corresponds to a maximum angular speed of 26.5rad$s^{-1}$. Therefore a correction in yaw of up to 1.6rad$s^{-1}$ or a quarter rotation is expected. This speed seems high enough to enable learning.
 \begin{equation}
 \begin{split}
-T = mgl sin\theta = I\ddot{theta} \\
-ddot{\theta} = \frac{mgl}{I}sin\theta\\
+T = mgl sin\theta = I\ddot{\theta} \\
+\ddot{\theta} = \frac{mgl}{I}sin\theta\\
 dot{\theta} = \frac{mgl}{I}sin\theta t + c_1\\
 \theta = \frac{mgl}{2I}sin\theta t^2 + c_1t + c_2\\
 t = \sqrt{\frac{2\theta I}{mglsin\theta}} \\
@@ -848,16 +871,16 @@ command to open a ssh window
 This opens a SSH connection to the Pi and a terminal on the computer. The following command is then run in this window to initiate listening on the Pi:
 
 \begin{gather}
-sudo python m/...... 
+sudo \: python \: m/start\_rollout.py 
 \end{gather}
 
 The terminal confirms a live connection and displays motor commands sent using the following format:
 
 \begin{gather}
-file format
+[Flywheel \: Speed, \: Wheel \: Speed]
 \end{gather}
 
-The script is terminated by sending \# in this command.
+The script is terminated by sending \# in this command, instead of numbers.
 
 \begin{figure}
   \centering
@@ -877,17 +900,18 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \begin{figure*}[t]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{front_lab}
+    \includegraphics[height = 6.5cm]{front_lab}
    \caption{Phone set-up}
   \label{fig:set_up}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{front_lab}
+  \centering
+    \includegraphics[height = 6.5cm]{hyperimu}
     \caption{HyperIMU settings}
   \label{fig:imuset}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{front_lab}
+    \includegraphics[height = 6.5cm]{relt}
     \caption{Release position}
   \label{fig:unirel}
   \end{subfigure}
@@ -915,7 +939,7 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \textbf{Rollouts}
 \begin{itemize}
 \item In an open flat space position the unicycle, run "doitreal.m" script from the connected computer
-\item A ssh window from the computer to the Pi will then open. Typing the command "sudo python m/...... " will initiate listening mode on the Pi, and display all motor torques and time between subsequent messages
+\item A ssh window from the computer to the Pi will then open. Typing the command "sudo python m/start\_rollout.py" will initiate listening mode on the Pi, and display all motor torques and time between subsequent messages
 \item Make sure that the unicycle is being held still and vertical at this point, either by holding onto the frame or string as in figure \ref{fig:unirel}
 \item The orientation is then measured for a few seconds before the motors start, at this point let go
 \item After the unicycle has fallen the motors should terminate, and confirmation of a successful rollout is required in Matlab 
@@ -936,7 +960,7 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \clearpage
 \begin{figure*}
   \centering
-    \includegraphics[width=\linewidth]{50ms_udp}
+    \includegraphics[width=\linewidth]{place}
   \caption{Optimum torque directions}
   \label{fig:quad}
 \end{figure*} 
