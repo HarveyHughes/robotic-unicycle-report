@@ -496,40 +496,58 @@ Additional factors are to be simulated to determine the variables that effect le
 
 %---------------------------------------
 \clearpage
-
-\begin{figure*}[ht!]
-  \centering
-  \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{frontnew}
+\begin{figure*}
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+    \includegraphics[width=\linewidth]{frontnewt}
    \caption{Front}
   \label{sub:frontnew}
   \end{subfigure}
-  \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{sidenew}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \includegraphics[width=\linewidth]{sidenewt}
     \caption{Side}
   \label{sub:sidenew}
   \end{subfigure}
-  \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{backnew}
-    \caption{Back}
-  \label{sub:backnew}
-  \end{subfigure}
   \newline
-  
-  \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{botnew}
-    \caption{Bottom}
+
+
+
+\tabskip=0pt
+\valign{#\cr
+  \hbox{%
+    \begin{subfigure}[b]{.49\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{backnewt}
+     \caption{Back}
+  \label{sub:backnew}
+    \end{subfigure}%
+  }\cr
+  \noalign{\hfill}
+  \hbox{%
+    \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=.602\textwidth]{botnewt}
+     \caption{Bottom}
   \label{sub:botnew}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.325\textwidth}
-    \includegraphics[width=\linewidth]{topnew}
-    \caption{Top}
+    \end{subfigure}%
+  }\vfill
+  \hbox{%
+    \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=.602\textwidth]{topnewt}
+     \caption{Top}
   \label{sub:topnew}
-  \end{subfigure}
-  
+    \end{subfigure}%
+  }\cr
+}
+
   \caption{New set-up of unicycle}
   \label{fig:new}
 \end{figure*}
+
+
+
+
 
 \begin{figure*}[t!]
   \centering
@@ -915,6 +933,13 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \subsubsection{Tests}
 
 %---------------------------------
+\clearpage
+\begin{figure*}
+  \centering
+    \includegraphics[width=\linewidth]{50ms_udp}
+  \caption{Optimum torque directions}
+  \label{fig:quad}
+\end{figure*} 
 \subsection{Quadratic Controller}
 All simulations and rollouts conducted so far have used a linear policy control function to determine the best action from the current state as in equation \ref{eq:lin}. There is the question of weather a linear policy is sufficient to control a unicycle. A quadratic policy of the form of equation \ref{eq:quad} may be more suitable.
 \begin{equation}
@@ -924,13 +949,8 @@ All simulations and rollouts conducted so far have used a linear policy control 
 
 
 
-\begin{figure*}
-  \centering
-    \includegraphics[width=\linewidth]{50ms_udp}
-  \caption{Testing connection to Pi sending torques by UDP}
-  \label{fig:quad}
-\end{figure*} 
-Figure \ref{fig:quad} depicts the ideal action to be taken for the state space covered by [$\theta ,\psi_f$]. This ideal action is the action which minimises the distance or angle moved in that direction to return the unicycle to the desired position of [$\theta ,\psi_f$] = [0,0]. 
+
+Figure \ref{fig:quad} depicts the optimum action to be taken for the state space covered by [$\theta ,\psi_f$]. This ideal action is the action which minimises the distance or angle moved in that direction to return the unicycle to the desired position of [$\theta ,\psi_f$] = [0,0]. 
 \newline
 To correct pitch a linear policy is clearly sufficient. When the unicycle tilts forward a negative torque on the wheel is desired, and vice versa for backwards tilt. However, when looking at correcting both pitch and roll a quadratic policy appears to be required. This can be easily visualised as the flywheel rotating away from the vertical axis within each quadrant. The vertical axis corresponds to a correcting in just pitch which is linear, so a torque away from this position results in the unicycle moving towards it. This means that the direction of torque required on the flywheel alternates between each quadrant, and is effectively an XOR problem. \cite{rodrigo} 
 \begin{equation}
