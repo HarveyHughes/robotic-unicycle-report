@@ -145,6 +145,8 @@ a
 
 \twocolumn
 
+
+\twocolumn[\section{Introduction}]
 \begin{figure*}[b!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
@@ -160,7 +162,6 @@ a
   \caption{Previous unicycle iterations}
   \label{fig:unimodels}
 \end{figure*}
-\section{Introduction}
 \subsection{Project aims}
 \lettrine[nindent=0em,lines=3]{T}he aim of this project is to determine a controller that is able to balance a robotic unicycle. The controller starts off with no information about the system, and is therefore required to slowly learn what are good actions to make. This mimics the way in which humans learn new tasks as children by trying new actions and seeing if they're beneficial.
 \newline
@@ -212,7 +213,7 @@ The robotic unicycles discussed so far have all been developed using traditional
 
 %------------------------------------------------
 \clearpage
-\section{Theory}
+\twocolumn[\section{Theory}]
 \subsection{Coordinate System}
 In order to fully define the unicycle state at each time step seven coordinates and their derivatives are required. These coordinates are shown in figure \ref{fig:ang} giving the state as
 
@@ -350,8 +351,8 @@ Other forms of cost function may be used such  quadratic. The reason the exponen
 %------------------------------------------
 
 \clearpage
-
-\begin{figure*}[t!]
+\twocolumn[\section{Current Unicycle Set-up}]
+\begin{figure*}[hb!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth,height=7.5cm]{uni_old_mech}
@@ -371,7 +372,8 @@ Other forms of cost function may be used such  quadratic. The reason the exponen
   \caption{Current set-up of unicycle}
   \label{fig:current}
 \end{figure*}
-\section{Current Unicycle Set-up}
+
+%\section{Current Unicycle Set-up}
 \subsection{Mechanical}
 Figure \ref{sub:frameold} shows the mechanical design of the unicycle. The unicycle is constructed from PCB boards made of copper coated fibreglass and subsequently welded together. This material is very light and stiff and helped keep the overall weight to about 1.2kg. The unicycle stands at 20cm tall in real life.
 \newline
@@ -430,7 +432,7 @@ These commands opened a command terminal on the Pi through Matlabs integration t
 %----------------------------------
 
 \clearpage
-
+\twocolumn[\section{Initial Simulation Results}]
 \begin{figure*}[ht!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
@@ -451,7 +453,7 @@ These commands opened a command terminal on the Pi through Matlabs integration t
   \caption{Simulating the effect of roll limit $\theta_{max}$ }
   \label{fig:rolllimit}
 \end{figure*}
-\section{Initial Simulation Results}
+%\section{Initial Simulation Results}
 
 During previous years the Unicycles performance on the real model was relatively poor. A mechanical redesign was considered to fix some of these issues. In order to evaluate the performance of this redesign and additional factors simulations were conducted as they allowed a quick and easy way to alter variables.
 
@@ -603,7 +605,8 @@ When testing a roll limit of $53^{\circ}$ the change in wheel size wasn't consid
   \label{fig:parts}
 \end{figure*}
 \clearpage
-\section{Mechanical Redesign}
+\twocolumn[\section{Mechanical Redesign}]
+%\section{Mechanical Redesign}
 Speculations from previous years and simulations results conducted indicated that the unicycle was unable to learn to balance with a roll limit of 17 degrees. This prompted the need for a new unicycle design pictured in figure \ref{fig:new} and \ref{fig:parts}. In order to allow for a good design the following principles were adopted:
 
 \begin{itemize}
@@ -718,20 +721,25 @@ The foam protection ring proved to be very effective. Roll angle was only margin
 Due to a change in material and slightly increase in size the overall weight of the unicycle was increased from 1.2kg to 1.5kg. Inertia calculations and conducted rollouts show that the increase in weight and inertial still allows for good performance. However, if this proved problematic the easiest change would be to introduce a larger flywheel as there is room in the casing, or reposition the phone mounting. A larger flywheel would help increase yaw and roll adjustments, and moving the phone would reduce the largest contributor to $I_{xx},I_{yy}$ and therefore decrease topple speed.  
 
 %--------------------------------------
-\section{Software Changes}
+\clearpage
+\twocolumn[\section{Software Changes}]
+
+%\section{Software Changes}
 
 %-----------------------
+\clearpage
+\twocolumn[\section{Results}]
 
 %--------------------------------
 \clearpage
-\section{Results}
+%\section{Results}
 \subsection{Phone}
 \subsubsection{Connection}
 Previously the phone connected to the Matlab scrip on the computer using Matlab mobile and wifi. However, this feature has since been removed from Matlab mobile and delays caused by using wifi were believed to occur occasionally. This could introduce extra noise and incorrect state measurements, therefore decreasing learning ability.
 \newline
 HyperIMU \cite{ianovir} was used to replace Matlab mobile. This allowed connection using wifi and USB. The transmission protocol followed was UDP using the packet layout:
 
-\begin{figure*}[t]
+\begin{figure*}[hb!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{timestep}
@@ -972,7 +980,8 @@ Testing using quadratic policies could be performed in future to allow an exact 
 %----------------------
 
 \clearpage
-\section{Conclusions}
+\twocolumn[\section{Conclusions}]
+%\section{Conclusions}
 \subsection{Progress}
 
 %------------------------------
