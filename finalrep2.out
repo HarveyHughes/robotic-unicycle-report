@@ -37,14 +37,12 @@
 \BOOKMARK [3][-]{subsubsection.7.3.1}{Test Procedure}{subsection.7.3}% 37
 \BOOKMARK [3][-]{subsubsection.7.3.2}{Functions}{subsection.7.3}% 38
 \BOOKMARK [3][-]{subsubsection.7.3.3}{Tests}{subsection.7.3}% 39
-\BOOKMARK [2][-]{subsection.7.4}{Quadratic Controller}{section.7}% 40
-\BOOKMARK [1][-]{section.8}{Conclusions}{}% 41
-\BOOKMARK [2][-]{subsection.8.1}{Progress}{section.8}% 42
-\BOOKMARK [2][-]{subsection.8.2}{Future Work}{section.8}% 43
-\BOOKMARK [3][-]{subsubsection.8.2.1}{Additional rollouts}{subsection.8.2}% 44
-\BOOKMARK [3][-]{subsubsection.8.2.2}{Encoder}{subsection.8.2}% 45
-\BOOKMARK [3][-]{subsubsection.8.2.3}{Exploration}{subsection.8.2}% 46
-\BOOKMARK [3][-]{subsubsection.8.2.4}{Mass adjustment}{subsection.8.2}% 47
-\BOOKMARK [3][-]{subsubsection.8.2.5}{Removing Matlab from rollouts}{subsection.8.2}% 48
-\BOOKMARK [1][-]{section.9}{Appendix}{}% 49
-\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 50
+\BOOKMARK [1][-]{section.8}{Conclusions}{}% 40
+\BOOKMARK [2][-]{subsection.8.1}{Progress}{section.8}% 41
+\BOOKMARK [2][-]{subsection.8.2}{Future Work}{section.8}% 42
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Encoder}{subsection.8.2}% 43
+\BOOKMARK [2][-]{subsection.8.3}{Quadratic Controller}{section.8}% 44
+\BOOKMARK [3][-]{subsubsection.8.3.1}{Exploration}{subsection.8.3}% 45
+\BOOKMARK [3][-]{subsubsection.8.3.2}{Removing Matlab from rollouts}{subsection.8.3}% 46
+\BOOKMARK [1][-]{section.9}{Appendix}{}% 47
+\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 48

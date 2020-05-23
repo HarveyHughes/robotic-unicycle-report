@@ -72,7 +72,7 @@
   {\end{figure}}
 \usepackage{wrapfig}
 \usepackage{amsmath}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{pdfpages}
@@ -267,7 +267,7 @@ A rotation about axis (x,y,z) by $\alpha$ can be defined using the following uni
 
 When post multiplied by the current state quaternion, the new updated position is calculated: $\textbf{q}_{new} = \textbf{q}_{old} . \textbf{q}_{rot}$.
 \newline
-The angle rotated during each time step can be easily found using the magnitude and direction of the angular velocity multiplied by timestep: $ \theta = |\omega |\delta t$.  \cite{arsalan}
+The angle rotated during each time step can be easily found using the magnitude and direction of the angular velocity multiplied by timestep: $ \theta = | \boldsymbol{\omega} |\delta t$.  \cite{arsalan}
 \subsection{Gaussian Processes}
 \color{red}
  Update with extra graphs
@@ -433,7 +433,7 @@ These commands opened a command terminal on the Pi through Matlabs integration t
 
 \clearpage
 \twocolumn[\section{Initial Simulation Results}]
-\begin{figure*}[ht!]
+\begin{figure*}[hb!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{average_angle}
@@ -695,7 +695,7 @@ Phone holder & 0.1 & 0.02 & 0 & 0.21 & 4.2 & 2.1 & 2.1 & 4.5 & 4.5 & 0.06\\
 \label{tab:mot}
 \end{table*}
 
-Table \ref{tab:mot} shows estimations of the moment of inertia of the new unicycle about the ground contact point. The estimations involved approximating each part to be a simple object such as planes, disks or cylinders. Then using the formula from the mechanics data book the inertia about each parts CoM could be calculated and moved by the parallel axis theorem to the contact point. The estimated inertias are 31.7, 32.1 and 2.64 $10^{-3}kgm^2$  for the x,y and z axis respectively. The inertia about the x and y axis are very similar as desired, meaning the unicycle should fall more uniformly in all directions. An estimation on the old unicycle was conducted for $I_{zz}$ \cite{arselan}, Harris assumed the unicycle was a cylinder and then checked his answer using measured angular accelerations. The value Harris calculated was 2.54$x10^{-3}kgm^2$ which is very similar to the new unicycle model.
+Table \ref{tab:mot} shows estimations of the moment of inertia of the new unicycle about the ground contact point. The estimations involved approximating each part to be a simple object such as planes, disks or cylinders. Then using the formula from the mechanics data book the inertia about each parts CoM could be calculated and moved by the parallel axis theorem to the contact point. The estimated inertias are 31.7, 32.1 and 2.64 $10^{-3}kgm^2$  for the x,y and z axis respectively. The inertia about the x and y axis are very similar as desired, meaning the unicycle should fall more uniformly in all directions. An estimation on the old unicycle was conducted for $I_{zz}$ \cite{arsalan}, Harris assumed the unicycle was a cylinder and then checked his answer using measured angular accelerations. The value Harris calculated was 2.54$x10^{-3}kgm^2$ which is very similar to the new unicycle model.
 \newline
 The inertia about the vertical z axis is 16.4 times that of the flywheel. This means that to conserve angular momentum the flywheel needs to spin this much faster then the maximum rate of change in yaw. The motor has a maximum load speed of 3550rpm, after the 14:1 planetary gear this corresponds to a maximum angular speed of 26.5rad$s^{-1}$. Therefore a correction in yaw of up to 1.6rad$s^{-1}$ or a quarter rotation per second is possible. This speed seems high enough to enable learning.
 \begin{equation}
@@ -728,17 +728,11 @@ Due to a change in material and slightly increase in size the overall weight of 
 
 %-----------------------
 \clearpage
-\twocolumn[\section{Results}]
+%\twocolumn[\section{Results}]
 
 %--------------------------------
 \clearpage
-%\section{Results}
-\subsection{Phone}
-\subsubsection{Connection}
-Previously the phone connected to the Matlab scrip on the computer using Matlab mobile and wifi. However, this feature has since been removed from Matlab mobile and delays caused by using wifi were believed to occur occasionally. This could introduce extra noise and incorrect state measurements, therefore decreasing learning ability.
-\newline
-HyperIMU \cite{ianovir} was used to replace Matlab mobile. This allowed connection using wifi and USB. The transmission protocol followed was UDP using the packet layout:
-
+\section{Results}
 \begin{figure*}[hb!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
@@ -759,6 +753,13 @@ HyperIMU \cite{ianovir} was used to replace Matlab mobile. This allowed connecti
   \caption{Testing connecting by USB}
   \label{fig:usb}
 \end{figure*}
+\subsection{Phone}
+\subsubsection{Connection}
+Previously the phone connected to the Matlab scrip on the computer using Matlab mobile and wifi. However, this feature has since been removed from Matlab mobile and delays caused by using wifi were believed to occur occasionally. This could introduce extra noise and incorrect state measurements, therefore decreasing learning ability.
+\newline
+HyperIMU \cite{ianovir} was used to replace Matlab mobile. This allowed connection using wifi and USB. The transmission protocol followed was UDP using the packet layout:
+
+
 
 \begin{align*}
 [t, a_x, a_y ,a_z , \dot{\alpha}_x, \dot{\alpha}_y , \dot{\alpha}_z \#]
@@ -853,7 +854,9 @@ system(mypi, 'sudo \: python \: m/filename.py') \nonumber
 \end{gather}
 This command opens a terminal on the Pi and runs the python file specified. Three files were used \cite{motorcmd} "enabling\_motors" , "motor\_control\_2" and "disabling\_motors". These turned on, set motor speed and turned off the motors respectively.
 \newline
-During testing it became apparent that there was a high degree of variation in changes to motor speed. This is unwanted because it introduces error to the dynamic model which predicts for a constant timestep. If this variation also resulted in larger timesteps then 50ms the learning ability would be drastically reduced as less data is record initially, and the dynamics are less linear therefore harder to model. Figure \ref{fig:pi} shows this variation occurring when controlling the motors, for a number of different timesteps. Initial recordings took longer in each test, the execution time then settled to be at minimum 90ms, with some spikes up to 160ms. This meant that lots of sensor readings weren't being processed.
+During testing it became apparent that there was a high degree of variation in time required to change motor speed. This is unwanted because it introduces error to the dynamic model which predicts for a constant timestep. If this variation also resulted in larger timesteps then 50ms the learning ability would be drastically reduced as less data is record initially, and the dynamics are less linear therefore harder to model. Increasing the capabilities of the dynamics model to include variable timesteps was considered. However, this would increase the problem dimensionality therefore the data collected may have to increase to effectively reduce uncertainty.
+\newline
+Figure \ref{fig:pi} shows this variation occurring when controlling the motors, for a number of different timesteps. Initial recordings took longer in each test, the execution time then settled to be at minimum 90ms, with some spikes up to 160ms. This meant that lots of sensor readings weren't being processed.
 \newline
 The cause of this delay was found to be the Matlab system command. This command waits for a completed message to be returned before the Matlab script proceeds. Due to the command opening a new terminal, and python file each time it took at minimum 90ms. Possible solutions were tested to avoid this; adding '\&' at the end of a command stops the script waiting for a reply, however this is incompatible when executed through a Pi. The command was also ran as a batch on a sub process, this allowed the script the proceed without delay but didn't successfully control the motors. 
 \newline
@@ -949,11 +952,82 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 
 %----------------------------
 \subsubsection{Tests}
+Due to limited access to the department caused by lockdown, and inability to find the correct cable for the battery charger minimal tests were conducted. The results of these tests can be seen in figure \ref{}. Limited success at balancing was achieved, this is likely attributed to low battery charge and insufficient rollouts performed. It was noticed that in one test the original policy learnt set the flywheel torque to maximum, and only after subsequent optimisations was this changed. This could signify the flywheel is currently too small for the unicycle, and a larger one may be required.
 
 %---------------------------------
 
 
 \clearpage
+
+
+%----------------------
+
+\onecolumn
+\begin{table}[ht!]
+\centering
+\begin{tabular}{ c | l }
+\multicolumn{2}{c}{Project Changes Timeline}\\ 
+\cmidrule(r{4em}){1-2}
+\parbox[t]{2mm}{\multirow{6}{*}{\rotatebox[origin=c]{90}{Michaelmas}}} & \textcolor{ForestGreen}{$\bullet$} Understand PILCO and its repository \\
+& \textcolor{ForestGreen}{$\bullet$} Solve run time error caused by windows \\
+& \textcolor{Maroon}{$\bullet$} Draft new unicycle designs \\
+& \textcolor{ForestGreen}{$\bullet$} Simulate roll limits \\
+& \textcolor{MidnightBlue}{$\bullet$} Redesign and test communication to phone \\
+& \textcolor{ForestGreen}{$\bullet$} Implement original state measurement \\
+\cmidrule(r{4em}){1-2}
+\parbox[t]{2mm}{\multirow{6}{*}{\rotatebox[origin=c]{90}{Lent}}} & \textcolor{ForestGreen}{$\bullet$} Simulate wheel size\\
+& \textcolor{ForestGreen}{$\bullet$} Simulate timestep \\
+& \textcolor{Maroon}{$\bullet$} Evaluate unicycle designs and create CAD model \\
+& \textcolor{Maroon}{$\bullet$} Get parts manufactured \\
+& \textcolor{Maroon}{$\bullet$} Dismantle old unicycle and assemble new model \\
+& \textcolor{MidnightBlue}{$\bullet$} Test motors are working \\
+\cmidrule(r{4em}){1-2}
+\parbox[t]{2mm}{\multirow{6}{*}{\rotatebox[origin=c]{90}{Easter}}} & \textcolor{MidnightBlue}{$\bullet$} Increase motor command execution speed\\
+& \textcolor{ForestGreen}{$\bullet$} Correct rollout state calculations  \\
+& \textcolor{ForestGreen}{$\bullet$} Improve constraint detection system\\
+& \textcolor{MidnightBlue}{$\bullet$} Research methods to incorporate encoders\\
+& \textcolor{Maroon}{$\bullet$} Perform real tests\\
+& \textcolor{ForestGreen}{$\bullet$} Research exploration techniques and controllers\\
+\cmidrule(r{4em}){1-2}
+Key &  \qquad	\textcolor{Maroon}{Mechanical} \qquad	
+\textcolor{MidnightBlue}{Electrical} 	\qquad
+\textcolor{ForestGreen}{Software} \\
+\end{tabular}
+\caption{}
+\label{tab:Timeline}
+\end{table}
+
+\twocolumn
+\twocolumn[\section{Conclusions}]
+%\section{Conclusions}
+
+
+\subsection{Progress}
+This project continues on from previous years work. The unicycle was shown to be successful at learning controllers in simulations, but various issues inhibited learning on the model unicycle.   
+\newline
+The work conducted on this project has taken a variety of forms as mechanical, electrical and software changes were required. A summary of this is seen in table \ref{tab:Timeline}. This can be broken down into simulations evaluating important parameters for learning, mechanical redesign implementing these discoveries and improving old communication systems to reduce noise and variation.
+\newline
+Initially simulations were conducted to establish the effect certain parameters had on learning. It was found that a new model was required for learning to occur due to the inability to learn at roll limits as low as $17^{\circ}$. Simulations different timesteps also provided additional insight. By reducing timestep from 50ms to 40ms learning occurred with fewer policy iterations, even allowing controllers to learn to balance at the origin and not wander off. The reason for this improvement is due to; increased linearity, additional data, and optimum torques active for longer. However, at 40ms the training time could be 10x longer then at 50ms. For this reason additional experiments should be conducted to determine the best timestep between 40-50ms to compromise speed and effectiveness. 
+\newline
+As simulations showed inadequate learning on the current unicycle model, a new model was designed. This model would also address problems in fall protecting, sensor stability and repeatable test procedures. The design increased the roll constraint to $47^{\circ}$, increased simplicity while maintaining rigidity. The increased size of unicycle sparked worries about insufficient motor power. However, simple changes could be made to correct this if required.   
+\newline
+Data communication between Matlab, phone and Raspberry Pi was completely redesigned. Delays in wifi communication and sending motor commands were solved by changing all transmissions to use UDP protocols. An additional benefit of this approach enables direct communication between Pi and phone. This means that in future rollouts could be performed without an attached computer.
+\newline
+Unfortunately few real rollouts were conducted..
+
+
+%------------------------------
+\subsection{Future Work}
+Future work should first seek to evaluate the performance of the new model, as limited rollouts were possible this year. These investigations should aim to determine weather the increased unicycle inertia is holding learning back. If so changes to phone position and flywheel size should be made to reduce this effect.
+\newline
+The last three years of project work have seen updates to the software, electrical and mechanical set-up. This means the unicycle is now at a point where a variety of factors can be investigated more deeply, to discover what techniques are required for problems of this form when using the PILCO algorithm. 
+\subsubsection{Encoder}
+Currently the wheel and flywheel angular velocities are calculated using the input torques. This approximates the relationship to be linear, which becomes less true the faster and further from upright the unicycle becomes. This approximation causes inaccuracies in the trained dynamics model introducing process noise, and increases learning complexity. 
+\newline
+In order to correct this error the motors should be measured directly. This is done using the attached encoders \cite{encoder}. Pulses are generated 512 times per revolution, which under normal motor speeds produces pulse frequencies up to 50kHz.
+\newline
+Both positive and negative pulses require counting to accurately determine speeds. This could be done using additional hardware or for simplicity interrupt routines on the Pi \cite{interrupt}. The motor states could then be transmitted to Matlab simply using UDP.
+
 \begin{figure*}
   \centering
     \includegraphics[width=\linewidth,height = 8cm]{place}
@@ -976,34 +1050,16 @@ To correct pitch a linear policy is clearly sufficient. When the unicycle tilts 
 Upon further thought this may not be a problem. The optimal solution may be quadratic but by rotating the other direction the same axis where only pitch is being corrected can be achieved. This can involve a much larger angle of up to $180^{\circ}$ to work. When roll is small the two directions become more similar, and therefore shouldn't pose a problem for most states the unicycle will visit. This non optimal route allows a linear policy to work where two quadrants have the optimal torque direction and two have the sub-optimal direction. Weiser believed that with a linear controller the unicycle learnt to either always fall forward or backwards in order to remain in the optimal regions. \cite{eric}
 \newline
 Testing using quadratic policies could be performed in future to allow an exact evaluation of using a linear approximation. This approximation is useful because the policy parameters optimised over are greatly reduced in a linear model. Therefore training speed is far quicker.
-
-%----------------------
-
-\clearpage
-\twocolumn[\section{Conclusions}]
-%\section{Conclusions}
-\subsection{Progress}
-
-%------------------------------
-\subsection{Future Work}
-
-%The last three years of project work have seen updates to the software, electrical and mechanical set-up. This means the unicycle is now at a point where a variety of factors can be investigated more deeply, to discover what techniqures are required for promlems of this form when using the PILCO algothym. 
-
-\subsubsection{Additional rollouts}
-
-
-\subsubsection{Encoder}
-
-
 \subsubsection{Exploration}
-
-
-\subsubsection{Mass adjustment}
-
-
+During simulated rollouts it became clear that it was likely policy optimisation could plateau. After this only minor improvements to trajectories were made. This may be caused by a linear policy being inadequate and therefore only so much progress is possible, normally resulting in trajectories drifting around the origin.
+\newline
+Another possible fix is to introduce policy exploration. Currently the policy iteratively optimised based off observed data, called exploitative learning. This means that local optimum can stop learning, and unvisited areas of the state space will not be explored. Exploring these areas, or jumping outside of current policy optimisations may be required to effectively learn the problem, even if this requires additional computation time. 
+\newline
+Various systems for this exploration exist within the PILCO repository. One particularly interesting method involves fantasising how data collected from new regions could reduce model uncertainty and therefore allow smart exploration to occur. \cite{exp}
+\newline
+Implementing methods such as this could prove vital to success on the real unicycle.
 \subsubsection{Removing Matlab from rollouts}
-
-
+Currently the unicycle is incapable of running independent from a computer. This is slightly impractical and additional wires may become a nuisance if balancing is achieved. For these reasons it may be beneficial to remove the need for a computer and Matlab script during rollouts. This would require writing the policy function onto the Pi, allow trajectory, and policy transfer onto the Pi, and using a UDP port between phone and Pi.
 %----------------------------
 
 %------------------------------------------------------------------------
@@ -1080,6 +1136,12 @@ Maxon Planetary Gears 1:14. \url{https://www.maxongroup.com/maxon/view/product/1
 \bibitem{encoder}
 Maxom encoder - 512 pulses/rev. \url{https://www.maxongroup.com/maxon/view/product/sensor/encoder/Magnetische-Encoder/ENCODERMR/ENCODER-MR-TYPM-128-512IMP-2-3KANAL/201937}
 
+\bibitem{interrupt}
+Jay Hamlin. 2013. \url{https://www.raspberrypi.org/forums/viewtopic.php?f=72&t=33880}
+ 
+\bibitem{exp}
+Rowan McAllister. 2016. ''Predicting Next-Step Loss Distributions in PILCO'' 
+ 
 \end{thebibliography}
 
 
