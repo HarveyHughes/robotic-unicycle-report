@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {ii}Quaternions}{9}{subsection.2.2}
 \contentsline {subsection}{\numberline {iii}Gaussian Processes}{10}{subsection.2.3}
 \contentsline {subsection}{\numberline {iv}Optimal Control}{10}{subsection.2.4}
-\contentsline {subsection}{\numberline {v}PILCO}{11}{subsection.2.5}
+\contentsline {subsection}{\numberline {v}PILCO}{10}{subsection.2.5}
 \contentsline {subsection}{\numberline {vi}Cost Function}{11}{subsection.2.6}
 \contentsline {section}{\numberline {III}Current Unicycle Set-up}{13}{section.3}
 \contentsline {subsection}{\numberline {i}Mechanical}{13}{subsection.3.1}
@@ -28,22 +28,24 @@
 \contentsline {subsection}{\numberline {ii}Inertia}{26}{subsection.5.2}
 \contentsline {subsection}{\numberline {iii}Design Evaluation}{27}{subsection.5.3}
 \contentsline {section}{\numberline {VI}Software Changes}{29}{section.6}
-\contentsline {section}{\numberline {VII}Results}{30}{section.7}
-\contentsline {subsection}{\numberline {i}Phone}{30}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {i.1}Connection}{30}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {i.2}Orientation}{31}{subsubsection.7.1.2}
-\contentsline {subsection}{\numberline {ii}Raspberry Pi}{32}{subsection.7.2}
-\contentsline {subsubsection}{\numberline {ii.1}Connection}{32}{subsubsection.7.2.1}
-\contentsline {subsection}{\numberline {iii}Rollouts}{35}{subsection.7.3}
-\contentsline {subsubsection}{\numberline {iii.1}Test Procedure}{35}{subsubsection.7.3.1}
-\contentsline {subsubsection}{\numberline {iii.2}Functions}{37}{subsubsection.7.3.2}
-\contentsline {subsubsection}{\numberline {iii.3}Tests}{37}{subsubsection.7.3.3}
-\contentsline {section}{\numberline {VIII}Conclusions}{39}{section.8}
-\contentsline {subsection}{\numberline {i}Progress}{39}{subsection.8.1}
-\contentsline {subsection}{\numberline {ii}Future Work}{40}{subsection.8.2}
-\contentsline {subsubsection}{\numberline {ii.1}Encoder}{40}{subsubsection.8.2.1}
-\contentsline {subsection}{\numberline {iii}Quadratic Controller}{40}{subsection.8.3}
-\contentsline {subsubsection}{\numberline {iii.1}Exploration}{42}{subsubsection.8.3.1}
-\contentsline {subsubsection}{\numberline {iii.2}Removing Matlab from rollouts}{42}{subsubsection.8.3.2}
-\contentsline {section}{\numberline {IX}Appendix}{46}{section.9}
-\contentsline {subsection}{\numberline {i}Risk Assessment Review}{46}{subsection.9.1}
+\contentsline {subsection}{\numberline {i}State Calculation}{29}{subsection.6.1}
+\contentsline {subsection}{\numberline {ii}Constraint Detection}{29}{subsection.6.2}
+\contentsline {section}{\numberline {VII}Results}{31}{section.7}
+\contentsline {subsection}{\numberline {i}Phone}{31}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {i.1}Connection}{31}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {i.2}Orientation}{32}{subsubsection.7.1.2}
+\contentsline {subsection}{\numberline {ii}Raspberry Pi}{33}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {ii.1}Connection}{33}{subsubsection.7.2.1}
+\contentsline {subsection}{\numberline {iii}Rollouts}{36}{subsection.7.3}
+\contentsline {subsubsection}{\numberline {iii.1}Test Procedure}{36}{subsubsection.7.3.1}
+\contentsline {subsubsection}{\numberline {iii.2}Tests}{38}{subsubsection.7.3.2}
+\contentsline {section}{\numberline {VIII}Conclusions}{40}{section.8}
+\contentsline {subsection}{\numberline {i}Progress}{40}{subsection.8.1}
+\contentsline {subsection}{\numberline {ii}Future Work}{41}{subsection.8.2}
+\contentsline {subsubsection}{\numberline {ii.1}Encoder}{41}{subsubsection.8.2.1}
+\contentsline {subsection}{\numberline {iii}Quadratic Controller}{41}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {iii.1}Exploration}{43}{subsubsection.8.3.1}
+\contentsline {subsubsection}{\numberline {iii.2}Removing Matlab from rollouts}{43}{subsubsection.8.3.2}
+\contentsline {section}{\numberline {IX}Appendix}{47}{section.9}
+\contentsline {subsection}{\numberline {i}Risk Assessment Review}{47}{subsection.9.1}
+\contentsline {subsection}{\numberline {ii}Covid-19}{48}{subsection.9.2}

@@ -27,22 +27,24 @@
 \BOOKMARK [2][-]{subsection.5.2}{Inertia}{section.5}% 27
 \BOOKMARK [2][-]{subsection.5.3}{Design Evaluation}{section.5}% 28
 \BOOKMARK [1][-]{section.6}{Software Changes}{}% 29
-\BOOKMARK [1][-]{section.7}{Results}{}% 30
-\BOOKMARK [2][-]{subsection.7.1}{Phone}{section.7}% 31
-\BOOKMARK [3][-]{subsubsection.7.1.1}{Connection}{subsection.7.1}% 32
-\BOOKMARK [3][-]{subsubsection.7.1.2}{Orientation}{subsection.7.1}% 33
-\BOOKMARK [2][-]{subsection.7.2}{Raspberry Pi}{section.7}% 34
-\BOOKMARK [3][-]{subsubsection.7.2.1}{Connection}{subsection.7.2}% 35
-\BOOKMARK [2][-]{subsection.7.3}{Rollouts}{section.7}% 36
-\BOOKMARK [3][-]{subsubsection.7.3.1}{Test Procedure}{subsection.7.3}% 37
-\BOOKMARK [3][-]{subsubsection.7.3.2}{Functions}{subsection.7.3}% 38
-\BOOKMARK [3][-]{subsubsection.7.3.3}{Tests}{subsection.7.3}% 39
-\BOOKMARK [1][-]{section.8}{Conclusions}{}% 40
-\BOOKMARK [2][-]{subsection.8.1}{Progress}{section.8}% 41
-\BOOKMARK [2][-]{subsection.8.2}{Future Work}{section.8}% 42
-\BOOKMARK [3][-]{subsubsection.8.2.1}{Encoder}{subsection.8.2}% 43
-\BOOKMARK [2][-]{subsection.8.3}{Quadratic Controller}{section.8}% 44
-\BOOKMARK [3][-]{subsubsection.8.3.1}{Exploration}{subsection.8.3}% 45
-\BOOKMARK [3][-]{subsubsection.8.3.2}{Removing Matlab from rollouts}{subsection.8.3}% 46
-\BOOKMARK [1][-]{section.9}{Appendix}{}% 47
-\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 48
+\BOOKMARK [2][-]{subsection.6.1}{State Calculation}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.2}{Constraint Detection}{section.6}% 31
+\BOOKMARK [1][-]{section.7}{Results}{}% 32
+\BOOKMARK [2][-]{subsection.7.1}{Phone}{section.7}% 33
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Connection}{subsection.7.1}% 34
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Orientation}{subsection.7.1}% 35
+\BOOKMARK [2][-]{subsection.7.2}{Raspberry Pi}{section.7}% 36
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Connection}{subsection.7.2}% 37
+\BOOKMARK [2][-]{subsection.7.3}{Rollouts}{section.7}% 38
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Test Procedure}{subsection.7.3}% 39
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Tests}{subsection.7.3}% 40
+\BOOKMARK [1][-]{section.8}{Conclusions}{}% 41
+\BOOKMARK [2][-]{subsection.8.1}{Progress}{section.8}% 42
+\BOOKMARK [2][-]{subsection.8.2}{Future Work}{section.8}% 43
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Encoder}{subsection.8.2}% 44
+\BOOKMARK [2][-]{subsection.8.3}{Quadratic Controller}{section.8}% 45
+\BOOKMARK [3][-]{subsubsection.8.3.1}{Exploration}{subsection.8.3}% 46
+\BOOKMARK [3][-]{subsubsection.8.3.2}{Removing Matlab from rollouts}{subsection.8.3}% 47
+\BOOKMARK [1][-]{section.9}{Appendix}{}% 48
+\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 49
+\BOOKMARK [2][-]{subsection.9.2}{Covid-19}{section.9}% 50

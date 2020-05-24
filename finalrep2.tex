@@ -132,12 +132,24 @@
 %	ARTICLE CONTENTS
 
 \section*{Technical Abstract}
-The application of machine learning to calculate a control policy opposed to using control theory could prove to be highly useful when its not possible to determine system dynamics. However, success outside of simulations has been slow. A robotic unicycle is considered in this project to provide a complex enough problem to fully test the PILCO algorithm.
+The application of machine learning to calculate a control policy opposed to using control theory could prove to be highly useful when its not possible to determine system dynamics. However, success outside of simulations has been slow. A robotic unicycle is considered in this project to provide a complex enough problem to fully test the PILCO algorithm. 
 \newline
+This project builds upon previous students work dating back to 2005. Throughout the projects history the unicycle being tested has evolved from a large and dangerous model, to a smaller model five years ago. in addition to model change different control algorithms have been used and extensively built up. 
+\newline
+The last two years of project work has seen significant improvements and simplifications to the software and electronics. This helped to pinpoint bottle-necks in the learning process but unfortunately the smaller unicycle showed great difficulty at balancing.
+\newline
+Speculation that the unicycle roll limit of $17^{\circ}$ impeded learning was thoroughly investigated among additional variables by running simulations. The simulations showed that a mechanical redesign is necessary for learning to occur. This design aimed to upgrade and simplify the physical robot to match the progress made in electrical and software. The new design has a roll limit of $47^{\circ}$, softens fall impact and reliably attaches all sensors. 
+\newline
+Numerous problems were found in the old communications methods between phone, computer and Raspberry Pi. These problems introduced large variation in delay between readings, and operated too slowly to provide sufficient learning. For sufficient learning a frequency above 20Hz was shown to be required. To solve these issues and provide additional simplicity UDP protocols were implemented for all transmissions. Unifying all transmissions this was enables the possibility of removing a computers involvement should it be desired in future.
+\newline
+Upon starting rollouts further problems were located and fixed. The initial orientation was measured to remove offsets created in the dynamics being learnt and therefore improve accuracy. Trajectories end when the unicycle hits the ground, this detection proved to be unreliable and rollouts became invalid. Additional constraint checks involving future predictions were implemented in addition to manual confirmation.
+\newline
+Unfortunately few rollouts were conducted due to problems charging the battery during the Covid-19 lockdown. The rollouts performed demonstrated........
+\newline
+During simulations and real rollouts policy optimisation often plateaued, or only learnt to wander instead of stay at the origin. The implementation of a quadratic controller and policy exploration techniques is believed to alleviate these issues.
+\newline
+Future work should seek to investigate these issues, taking advantage of the updated and simplified mechanical, electrical, and software systems to identify key requirements. 
 
-
-\clearpage
-a
 \onecolumn
 
 %----------------------------------------------------------------------------------------
@@ -723,7 +735,20 @@ Due to a change in material and slightly increase in size the overall weight of 
 %--------------------------------------
 \clearpage
 \twocolumn[\section{Software Changes}]
+A number of problems were detected in the software running a real rollout. These faults were constraint detection and state calculation.
+\subsection{State Calculation}
+Previously state calculations incorrectly assumed wheel and flywheel angular velocities was directly the input torques. A slight correction to include gearing ratio, and no load speed was required to fix this. Additionally x,y position was reset at each measurement and therefore needed correcting.
+\subsection{Constraint Detection}
+When the unicycle hits the floor the rollout should terminate and trim any readings made after the impact. This is the ensure training occurs on valid dynamic data, and the unicycle can't cause damage while fallen over. It was noted that this detection was unreliable and often failed.
+\newline
+The process of constraint detection followed: Implement policy \textbf{u}=$\pi (\textbf{x})$ $\rightarrow$ Get measurement $\rightarrow$ Calculate next state, if constraint exceeded then terminate. This caused problems because the constraints are checked under the current state, which is calculated using current $\boldsymbol{ \omega }$ and last $\delta t$. Had the collision occurred between the last two measurements then the current state would be calculated using $\boldsymbol{\omega}$ after an impact, therefore incorrectly calculation angle.
+\newline
+In order to remedy this error a prediction one step into the future was added. This position was then checked against the constraints and noted for next timestep if exceeded. To check if a collision occurred as predicted $\boldsymbol{\omega}$ is checked against the last position. In the event of a collision the impact would cause large accelerations in approximately opposite direction to before impact. These accelerations would be larger then those possible with a change in torque meaning thresholding could detect collisions.
+\newline
+This new method greatly improved detection. However, some errors still occurred meaning a manual check was introduced into rollouts to ensure valid data was passed into PILCO. 
 
+
+ 
 %\section{Software Changes}
 
 %-----------------------
@@ -945,11 +970,6 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \end{itemize}
 
 \twocolumn
-%------------------------------------------
-\subsubsection{Functions}
-
-
-
 %----------------------------
 \subsubsection{Tests}
 Due to limited access to the department caused by lockdown, and inability to find the correct cable for the battery charger minimal tests were conducted. The results of these tests can be seen in figure \ref{}. Limited success at balancing was achieved, this is likely attributed to low battery charge and insufficient rollouts performed. It was noticed that in one test the original policy learnt set the flywheel torque to maximum, and only after subsequent optimisations was this changed. This could signify the flywheel is currently too small for the unicycle, and a larger one may be required.
@@ -1027,7 +1047,6 @@ Currently the wheel and flywheel angular velocities are calculated using the inp
 In order to correct this error the motors should be measured directly. This is done using the attached encoders \cite{encoder}. Pulses are generated 512 times per revolution, which under normal motor speeds produces pulse frequencies up to 50kHz.
 \newline
 Both positive and negative pulses require counting to accurately determine speeds. This could be done using additional hardware or for simplicity interrupt routines on the Pi \cite{interrupt}. The motor states could then be transmitted to Matlab simply using UDP.
-
 \begin{figure*}
   \centering
     \includegraphics[width=\linewidth,height = 8cm]{place}
@@ -1064,55 +1083,76 @@ Currently the unicycle is incapable of running independent from a computer. This
 
 %------------------------------------------------------------------------
 \clearpage
-\begin{thebibliography}{9}
-\bibitem{pilco} 
-M. P. Deisenroth and C. E. Rasmussen. ''PILCO: A Model-based and Data-Efficient Approach to Policy Search''.
-2011. \url{http://www.icml-2011.org/papers/323_icmlpaper.pdf.}
 
-\bibitem{original}
-Mark Mellors, Andrew Lamb and J Maciejowski. 2005 \url{roboticunicycle.info} 
 
-\bibitem{neil}
-Neil D'Souza-Mathew. ''Balancing of a Robotic Unicycle''. MEng Thesis. CUED. 2008 \url{roboticunicycle.info/documents/MyFinalReport.pdf}
-
-\bibitem{forster}
-David Forster. ''Robotic Unicycle'' MEng Thesis. CUED. 2009
-
-\bibitem{mchut}
-Andrew McHutchon, ''Machine learning for Control''. MEng Thesis. CUED. 2010
-
-\bibitem{roderigo}
-Rodrigo Queiro. ''Machine Learning for Control''. MEng Thesis. CUED. 2011
-\url{https://github.com/drigz/IIB-Project/blob/master/iibproject.pdf}
-
-\bibitem{douglass}
-Alan Douglass. ''Machine Learning for Control''. MEng Thesis. CUED. 2011
-
-\bibitem{eric}
-Eric Weiser. ''Robotic Unicycle'' . MEng Thesis. CUED. 2017
-
-\bibitem{arsalan}
-Arsalan Harris. ''Robotic Unicycle'' . MEng Thesis. CUED. 2019
- 
- 
-\bibitem{ianovir} 
-Ianovir: HyperIMU app 
-\url{ianovir.com/works/mobile/hyperimu/}
-
-\bibitem{other1}
-mhexrobot. 2012. \url{https://edgetriggered.wordpress.com/category/unicycle-robot/}
-
-\bibitem{other2}
-G. Daoxiong, P. Qi, Z. Guoyu, and L. Xinghui, ''Lqr control for a self-balancing unicycle
-robot on inclined plane''. 2012.
-
-\bibitem{other3}
+\begin{thebibliography}{56}
+\bibitem[1990. Vos, Flotow]{other3}
 D. W. Vos and A. H. Von Flotow, ''Dynamics and nonlinear adaptive control of an
 autonomous unicycle: Theory and experiment,'' in 29th IEEE Conference on Decision
 and Control, pp. 182{187, IEEE, 1990.}
 
-\bibitem{other4}
+\bibitem[2005. Mellors, Lamb, Maciejowski]{original}
+Mark Mellors and Andrew Lamb and J Maciejowski. ,
+ 2005 ,
+ \url{roboticunicycle.info} 
+ 
+\bibitem[2008. D'Souza-Mathew]{neil}
+Neil D'Souza-Mathew. ,
+ ''Balancing of a Robotic Unicycle''. ,
+ MEng Thesis. CUED. ,
+ 2008,
+  \url{roboticunicycle.info/documents/MyFinalReport.pdf}
+
+
+\bibitem[2009. Forster]{forster}
+David Forster. ''Robotic Unicycle'' MEng Thesis. CUED. 2009
+
+\bibitem[2010. McHutchon]{mchut}
+Andrew McHutchon, ''Machine learning for Control''. MEng Thesis. CUED. 2010
+
+\bibitem[2011. Rasmussen, Deisenroth]{pilco} 
+M. P. Deisenroth and C. E. Rasmussen. , ''PILCO: A Model-based and Data-Efficient Approach to Policy Search''. ,
+2011.,
+ \url{http://www.icml-2011.org/papers/323_icmlpaper.pdf.}
+
+
+\bibitem[2011. Rodrigo]{roderigo}
+Rodrigo Queiro. ''Machine Learning for Control''. MEng Thesis. CUED. 2011
+\url{https://github.com/drigz/IIB-Project/blob/master/iibproject.pdf}
+
+\bibitem[2011. Douglass]{douglass}
+Alan Douglass. ''Machine Learning for Control''. MEng Thesis. CUED. 2011
+
+\bibitem[2012. mhexrobot]{other1}
+mhexrobot. 2012. \url{https://edgetriggered.wordpress.com/category/unicycle-robot/}
+
+\bibitem[2012. Daoxiong, Qi, Guoyu, Xinghui]{other2}
+G. Daoxiong, P. Qi, Z. Guoyu, and L. Xinghui, ''Lqr control for a self-balancing unicycle
+robot on inclined plane''. 2012.
+
+\bibitem[2013. Hamlin]{interrupt}
+Jay Hamlin. 2013. \url{https://www.raspberrypi.org/forums/viewtopic.php?f=72&t=33880}
+ 
+\bibitem[2016. Mcallister]{exp}
+Rowan McAllister. 2016. ''Predicting Next-Step Loss Distributions in PILCO''
+
+\bibitem[2017. Weiser]{eric}
+Eric Weiser. ''Robotic Unicycle'' . MEng Thesis. CUED. 2017
+
+\bibitem[2019. Harris]{arsalan}
+Arsalan Harris. ''Robotic Unicycle'' . MEng Thesis. CUED. 2019
+ 
+\bibitem[2019. Davis]{other4}
 Matthew Davis. 2019 \url{https://www.mdavis.xyz/unicycle/}
+
+
+
+\phantom{please be invisible}
+\centerline{\bfseries Software and Hardware} 
+
+\bibitem{ianovir} 
+Ianovir: HyperIMU app 
+\url{ianovir.com/works/mobile/hyperimu/}
 
 \bibitem{foam}
 Protective foam. \url{https://www.diy.com/departments/climaflex-polyethylene-foam-pipe-lagging-l-1m-dia-15mm/5413257001143_BQ.prd}
@@ -1129,19 +1169,12 @@ Phone mount. \url{https://www.amazon.co.uk/dp/B07GQLYPZZ/ref=cm_sw_em_r_mt_dp_U_
 \bibitem{motor}
 Maxom Motors. \url{https://www.maxongroup.com/maxon/view/product/110134}
 
-
 \bibitem{gear}
 Maxon Planetary Gears 1:14. \url{https://www.maxongroup.com/maxon/view/product/134158}
 
 \bibitem{encoder}
 Maxom encoder - 512 pulses/rev. \url{https://www.maxongroup.com/maxon/view/product/sensor/encoder/Magnetische-Encoder/ENCODERMR/ENCODER-MR-TYPM-128-512IMP-2-3KANAL/201937}
 
-\bibitem{interrupt}
-Jay Hamlin. 2013. \url{https://www.raspberrypi.org/forums/viewtopic.php?f=72&t=33880}
- 
-\bibitem{exp}
-Rowan McAllister. 2016. ''Predicting Next-Step Loss Distributions in PILCO'' 
- 
 \end{thebibliography}
 
 
@@ -1151,6 +1184,8 @@ Rowan McAllister. 2016. ''Predicting Next-Step Loss Distributions in PILCO''
 \section{Appendix}
 \subsection{Risk Assessment Review}
 
+\clearpage
+\subsection{Covid-19}
 
 
 
