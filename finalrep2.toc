@@ -7,9 +7,8 @@
 \contentsline {subsection}{\numberline {i}Coordinate System}{9}{subsection.2.1}
 \contentsline {subsection}{\numberline {ii}Quaternions}{9}{subsection.2.2}
 \contentsline {subsection}{\numberline {iii}Gaussian Processes}{10}{subsection.2.3}
-\contentsline {subsection}{\numberline {iv}Optimal Control}{10}{subsection.2.4}
-\contentsline {subsection}{\numberline {v}PILCO}{10}{subsection.2.5}
-\contentsline {subsection}{\numberline {vi}Cost Function}{11}{subsection.2.6}
+\contentsline {subsection}{\numberline {iv}PILCO}{10}{subsection.2.4}
+\contentsline {subsection}{\numberline {v}Cost Function}{12}{subsection.2.5}
 \contentsline {section}{\numberline {III}Current Unicycle Set-up}{13}{section.3}
 \contentsline {subsection}{\numberline {i}Mechanical}{13}{subsection.3.1}
 \contentsline {subsection}{\numberline {ii}Electrical}{14}{subsection.3.2}
@@ -17,8 +16,8 @@
 \contentsline {section}{\numberline {IV}Initial Simulation Results}{17}{section.4}
 \contentsline {subsection}{\numberline {i}Test Procedure}{17}{subsection.4.1}
 \contentsline {subsection}{\numberline {ii}Roll Limit}{17}{subsection.4.2}
-\contentsline {subsection}{\numberline {iii}Sampling Time}{19}{subsection.4.3}
-\contentsline {subsection}{\numberline {iv}Wheel Size}{20}{subsection.4.4}
+\contentsline {subsection}{\numberline {iii}Wheel Size}{19}{subsection.4.3}
+\contentsline {subsection}{\numberline {iv}Sampling Time}{19}{subsection.4.4}
 \contentsline {section}{\numberline {V}Mechanical Redesign}{23}{section.5}
 \contentsline {subsection}{\numberline {i}Changes}{23}{subsection.5.1}
 \contentsline {subsubsection}{\numberline {i.1}Roll limit}{23}{subsubsection.5.1.1}
@@ -33,7 +32,7 @@
 \contentsline {section}{\numberline {VII}Results}{31}{section.7}
 \contentsline {subsection}{\numberline {i}Phone}{31}{subsection.7.1}
 \contentsline {subsubsection}{\numberline {i.1}Connection}{31}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {i.2}Orientation}{32}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {i.2}Orientation}{33}{subsubsection.7.1.2}
 \contentsline {subsection}{\numberline {ii}Raspberry Pi}{33}{subsection.7.2}
 \contentsline {subsubsection}{\numberline {ii.1}Connection}{33}{subsubsection.7.2.1}
 \contentsline {subsection}{\numberline {iii}Rollouts}{36}{subsection.7.3}
@@ -43,9 +42,10 @@
 \contentsline {subsection}{\numberline {i}Progress}{40}{subsection.8.1}
 \contentsline {subsection}{\numberline {ii}Future Work}{41}{subsection.8.2}
 \contentsline {subsubsection}{\numberline {ii.1}Encoder}{41}{subsubsection.8.2.1}
-\contentsline {subsection}{\numberline {iii}Quadratic Controller}{41}{subsection.8.3}
-\contentsline {subsubsection}{\numberline {iii.1}Exploration}{43}{subsubsection.8.3.1}
-\contentsline {subsubsection}{\numberline {iii.2}Removing Matlab from rollouts}{43}{subsubsection.8.3.2}
+\contentsline {subsection}{\numberline {iii}State Calculation}{41}{subsection.8.3}
+\contentsline {subsection}{\numberline {iv}Quadratic Controller}{42}{subsection.8.4}
+\contentsline {subsubsection}{\numberline {iv.1}Exploration}{43}{subsubsection.8.4.1}
+\contentsline {subsubsection}{\numberline {iv.2}Removing Matlab from rollouts}{44}{subsubsection.8.4.2}
 \contentsline {section}{\numberline {IX}Appendix}{47}{section.9}
 \contentsline {subsection}{\numberline {i}Risk Assessment Review}{47}{subsection.9.1}
 \contentsline {subsection}{\numberline {ii}Covid-19}{48}{subsection.9.2}

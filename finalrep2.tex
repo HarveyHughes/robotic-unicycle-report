@@ -124,7 +124,7 @@
 %----------------------------------------------------------------------------------------
 
 \begin{document}
-
+\onecolumn
 % Print the title
 \maketitle
 
@@ -132,21 +132,29 @@
 %	ARTICLE CONTENTS
 
 \section*{Technical Abstract}
-The application of machine learning to calculate a control policy opposed to using control theory could prove to be highly useful when its not possible to determine system dynamics. However, success outside of simulations has been slow. A robotic unicycle is considered in this project to provide a complex enough problem to fully test the PILCO algorithm. 
+The application of machine learning to determine effective controllers opposed to using control theory could prove to be highly useful when its not possible to determine system dynamics. This would mean new complex tasks could be tackled with minimal knowledge about system behaviour.  A robotic unicycle is considered in this project to provide a complex enough problem to fully test the PILCO algorithm. While successful in simulations, real success on unicycle models has been more challenging. 
+\newline
 \newline
 This project builds upon previous students work dating back to 2005. Throughout the projects history the unicycle being tested has evolved from a large and dangerous model, to a smaller model five years ago. in addition to model change different control algorithms have been used and extensively built up. 
 \newline
+\newline
 The last two years of project work has seen significant improvements and simplifications to the software and electronics. This helped to pinpoint bottle-necks in the learning process but unfortunately the smaller unicycle showed great difficulty at balancing.
+\newline
 \newline
 Speculation that the unicycle roll limit of $17^{\circ}$ impeded learning was thoroughly investigated among additional variables by running simulations. The simulations showed that a mechanical redesign is necessary for learning to occur. This design aimed to upgrade and simplify the physical robot to match the progress made in electrical and software. The new design has a roll limit of $47^{\circ}$, softens fall impact and reliably attaches all sensors. 
 \newline
+\newline
 Numerous problems were found in the old communications methods between phone, computer and Raspberry Pi. These problems introduced large variation in delay between readings, and operated too slowly to provide sufficient learning. For sufficient learning a frequency above 20Hz was shown to be required. To solve these issues and provide additional simplicity UDP protocols were implemented for all transmissions. Unifying all transmissions this was enables the possibility of removing a computers involvement should it be desired in future.
+\newline
 \newline
 Upon starting rollouts further problems were located and fixed. The initial orientation was measured to remove offsets created in the dynamics being learnt and therefore improve accuracy. Trajectories end when the unicycle hits the ground, this detection proved to be unreliable and rollouts became invalid. Additional constraint checks involving future predictions were implemented in addition to manual confirmation.
 \newline
+\newline
 Unfortunately few rollouts were conducted due to problems charging the battery during the Covid-19 lockdown. The rollouts performed demonstrated........
 \newline
+\newline
 During simulations and real rollouts policy optimisation often plateaued, or only learnt to wander instead of stay at the origin. The implementation of a quadratic controller and policy exploration techniques is believed to alleviate these issues.
+\newline
 \newline
 Future work should seek to investigate these issues, taking advantage of the updated and simplified mechanical, electrical, and software systems to identify key requirements. 
 
@@ -163,12 +171,12 @@ Future work should seek to investigate these issues, taking advantage of the upd
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth,height=7.5cm]{first}
-   \caption{1m tall 1st model \cite{roderigo}}
+   \caption{1st model \cite{roderigo}}
   \label{sub:old1}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth,height=7.5cm]{old_unicycle}
-    \caption{20cm tall 2nd model \cite{eric}}
+    \caption{2nd model \cite{eric}}
   \label{sub:old2}
   \end{subfigure}
   \caption{Previous unicycle iterations}
@@ -177,7 +185,7 @@ Future work should seek to investigate these issues, taking advantage of the upd
 \subsection{Project aims}
 \lettrine[nindent=0em,lines=3]{T}he aim of this project is to determine a controller that is able to balance a robotic unicycle. The controller starts off with no information about the system, and is therefore required to slowly learn what are good actions to make. This mimics the way in which humans learn new tasks as children by trying new actions and seeing if they're beneficial.
 \newline
-This is an ongoing project in the engineering department, dating back as far as 2005. In previous years success has been shown in simulations yet has so far been hard to achieve in real life. A major outcome of this project is to build upon existing  work and fix new and outstanding issues in order to bring the success of a real unicycle closer to simulations. 
+This is an ongoing project in the engineering department, dating back as far as 2005. In previous years success has been shown in simulations yet has so far been hard to achieve in real life. A major outcome of this project is to build upon existing  work and redesign key elements of the unicycle. These redesigns hope to shrink the difference in success between real and simulated tests. 
 \newline
 This project aims to demonstrate the effectiveness of implementing the PILCO algorithm \cite{pilco} on more complex dynamic systems. PILCO has previously been shown to tackle simpler problems such as a cart-pole system with high efficiency compared to other algorithms. 
 \newline 
@@ -198,7 +206,8 @@ In 2010 Mchutchon \cite{mchut} applied the RMLC (Reinforced Model Learnt Control
 The size of the unicycle posed serious safety risks, both in terms of large power usage and the need to limit the unicycle during tests. One way this was done was by attaching to bike racks \cite{neil} or suspending the unicycle from the department atrium ceiling \cite{roderigo}. These methods while reducing the risk didn't eliminate it, and caused unnecessary restrictions and disturbances to the unicycle dynamics. 
 \newline
 To increase safety a small model unicycle was constructed in 2015 by Tukiainen \cite{tuk} as in figure \ref{sub:old2}. PILCO was also implemented on the unicycle \cite{pilco}. The increased safety of the smaller unicycle allowed unconstrained motion to be tested more easily. Problems balancing the unicycle longer than 2s were encountered at this point, with concerns about identifying the cause for problems. In 2017 an overhaul of the software was done by Wieser \cite{eric}, and in 2019 an electrical overhaul by Harris \cite{arsalan}. This was to simplify the system and allow for more accurate troubleshooting. 
-
+\newline
+At the project start the pre-existing work consisted of: Small model unicycle with Rasperry Pi electronics and phone sensor, and updated PILCO toolbox including simulation model of unicycle model. The current state of unicycle is discussed in more detail in section III. 
 \begin{figure*}[t!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
@@ -281,11 +290,13 @@ When post multiplied by the current state quaternion, the new updated position i
 \newline
 The angle rotated during each time step can be easily found using the magnitude and direction of the angular velocity multiplied by timestep: $ \theta = | \boldsymbol{\omega} |\delta t$.  \cite{arsalan}
 \subsection{Gaussian Processes}
-\color{red}
- Update with extra graphs
- \color{black}
- 
-A Gaussian process is used to model the dynamics and gives a range of possible functions which fit observed data in a non parametric way as to not introduce model bias. A Gaussian process is a generalisation of a multivariate Gaussian to infinitely many variables. As a result a mean and covariance function are used to define it as in equation \ref{eq:gp}.
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=\linewidth]{gp}
+   \caption{Fitting a GP to noisy observed data (not from unicycle)}
+  \label{fig:gp}
+\end{figure}
+A Gaussian process is used to model the dynamics and gives a range of possible functions which fit observed data in a non parametric way as to not introduce model bias as in figure \ref{fig:gp}. A Gaussian process is a generalisation of a multivariate Gaussian to infinitely many variables. This can be through as each position having a mean and variance, s a result a mean and covariance functions are used to define it as in equation \ref{eq:gp}.
 \begin{equation}\label{eq:gp}
 \begin{gathered}
 f(\textbf{x}) \sim \mathcal{GP}(m(\textbf{x},k(\textbf{x},\textbf{x'})) \\
@@ -293,16 +304,29 @@ m(\textbf{x}) = \mathbb{E}[f(\textbf{x})]  \\
 k(\textbf{x},\textbf{x'}) = \mathbb{E}[(f(\textbf{x})-m(\textbf{x}))( f(\textbf{x'})-m(\textbf{x'}))]
 \end{gathered}
 \end{equation}
-A GP eliminates model bias as a group of functions are fit to the observed data using the mean and covariance function. This ensures that all possible solutions to the dynamics are considered, with the most probably functions taking precedence in predictions.
+A GP eliminates model bias as a group of functions are fit to the observed data. This ensures that all possible solutions to the dynamics are considered, with the most probably functions taking precedence in predictions.
+
 
 %----------------------------------
-\subsection{Optimal Control}
- \color{red}
- Write this later:
- \color{black}
- 
 %--------------------------------------------------------
-\begin{figure}[h]
+
+
+\subsection{PILCO}
+In policy optimisation an algorithm called PILCO \cite{pilco} will be used.
+PILCO is an example of an optimum control algorithm. These algorithms will optimise a policy to decide the best action $\textbf{u}$ given the unicycles state.
+Optimum actions are determined by evaluating the expected loss over a horizon under the current policy, as in equation \ref{eq:pilco}. 
+
+\begin{equation}
+\begin{split}
+\pi^*(\textbf{x}) = argmin \sum_0^tc(\textbf{x}^{(i)}) \\
+\textbf{u}^{(i)} = \pi(\textbf{x}^{(i)} )\\
+\end{split}
+\label{eq:pilco}
+\end{equation}
+
+Trajectories are predicted using a GP dynamic model. The use of this model helps to increase the data efficiency of optimisation compared to model free methods such as Q-learning and temporal difference learning. This ensures that minimal rollouts are required which is a major aim of PILCO.
+
+\begin{figure}[ht!]
   \centering
   \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\linewidth]{u2}
@@ -314,27 +338,10 @@ A GP eliminates model bias as a group of functions are fit to the observed data 
   \caption{Loss prediction}
   \label{sub:ffs}
   \end{subfigure}
-  \caption{Predictions from PILCO approach}
+  \caption{State distribution predictions made using PILCO. The darker region represents an updated prediction using the data collected from the green rollout.}
   \label{fig:pilco}
 \end{figure}
-
-\subsection{PILCO}
-In policy optimisation an algorithm called PILCO \cite{pilco} will be used.
-This method will optimise a policy to decide the best action $\textbf{u}$ given the unicycles state. To determine optimum actions the expected loss over a horizon is evaluated under the current policy, as in equation \ref{eq:pilco}.
-
-
-\begin{equation}
-\begin{split}
-\pi^*(\textbf{x}) = argmin \sum_0^tc(\textbf{x}^{(i)}) \\
-\textbf{u}^{(i)} = \pi(\textbf{x}^{(i)} )\\
-\end{split}
-\label{eq:pilco}
-\end{equation}
-
-
 %-----------------------------------
-
-
 A major advantage of PILCO is the ability to retain uncertainty throughout this process. This means an initial state distribution can be propagated forward to generate a state distribution at each time step. These distributions are used to calculate the average instantaneous cost in policy evaluation.
 The uncertainty grows over time and comes from an initial variation in start position, measurement noise, and process noise. 
 \newline
@@ -405,7 +412,7 @@ Attaching the phone and Pi involved rubber bands. This introduced lots of additi
 \begin{figure*}[t!]
   \centering
     \includegraphics[width=\linewidth]{pilco}
-   \caption{Information displayed during rollouts}
+   \caption{Information displayed during rollouts. The state window shows the trajectory of 10 rollouts under the current policy, with each rollouts loss visible in the loss window. Predictive state distributions and updated predictions after an additional rollout are shown as light blue and dark blue regions respectively. The animation displayed corresponds to the green trajectory, which is used in training. Previous policy optimisations can be seen in the policy window.}
   \label{fig:pilcoscreen}
 \end{figure*}
 \subsection{Software}
@@ -426,7 +433,7 @@ The main body of code is run in Matlab on an attached computer. This code is par
 \item Iterations of learning dynamics from new rollouts, then re-optimising policy function for future use can then occur
 \end{itemize}
 
-Figure \ref{fig:pilcoscreen} shows the information generated during rollouts. Shown in these plots is  states, loss, unicycle animation, and policy improvements between iterations. The state window shows the trajectory of 10 rollouts under the current policy, with the rollout used in training displayed in green. With the predictive state uncertainty and mean displayed in light blue. The dark blue region indicates the updated predictive distribution after re-optimising the dynamics function using the new data. Multiple rollouts are displayed to get a better idea about the behaviours exhibited by the controller, and to check the chosen rollout is typical. The loss window shows the same 10 rollouts and the cost distribution expected at each timestep. The animation displays the unicycle trajectory and traced path for the green rollout, the current actions and cost is also displayed. 
+Figure \ref{fig:pilcoscreen} shows the information generated during rollouts. Shown in these plots is  states, loss, unicycle animation, and policy improvements between iterations. Checks into current performance can be made on the fly. Multiple rollouts are displayed to get a better idea about the behaviours exhibited by the controller, and to check the chosen rollout is typical. 
 Policy learning can be analysed by looking at the policy window. This displays the expected loss, optimized 100 times, for each policy iteration. A horizontal line, or grouping of consecutive policy lines can indicate a reduction in learning rate. Often when little data has been observed the trajectory predictions can be overly optimistic, causing the predicted loss decrease rapidly in some iterations. This prediction is later reverted once more data has been observed.
 \newline
 Additional features such as replaying an animation can be performed by right clicking the desired trajectory line in the GUI, described in detail in by Weiser \cite{eric}. 
@@ -449,26 +456,24 @@ These commands opened a command terminal on the Pi through Matlabs integration t
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{average_angle}
-   \caption{Average of six tests}
+   \caption{Average time upright across 6 tests}
   \label{fig:a}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{disp_angle}
-    \caption{With $\pm \sigma$}
+    \caption{Performance variation ($\pm \sigma$)}
   \label{fig:sd}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{average_angle_loss}
-    \caption{Comparing against rollout loss}
+    \caption{Using average loss as metric}
   \label{fig:rl}
   \end{subfigure}
-  \caption{Simulating the effect of roll limit $\theta_{max}$ }
+  \caption{Simulating the effect of roll limit $\theta_{max}$ on learning rate }
   \label{fig:rolllimit}
 \end{figure*}
 %\section{Initial Simulation Results}
-
-During previous years the Unicycles performance on the real model was relatively poor. A mechanical redesign was considered to fix some of these issues. In order to evaluate the performance of this redesign and additional factors simulations were conducted as they allowed a quick and easy way to alter variables.
-
+The following section discuses results obtained through simulations. While performance between real life and simulations is greatly different, these simulations proved invaluable. They enabled faster and easier testing of various model parameters in order to evaluate unicycle design choices.
 %-------------------------------
 \subsection{Test Procedure}
 
@@ -494,50 +499,57 @@ After 10 random rollouts the roll limit made little difference as in figure \ref
     \caption{Vary wheel size}
   \label{fig:exwh}
   \end{subfigure}
-  \caption{Simulated performance compared to experience time}
+  \caption{Simulated performance of each test as total experience changes}
   \label{fig:exti}
 \end{figure}
 The variation between simulations can be seen in figure \ref{fig:sd} and shows greater reliability at higher roll limits, with a standard deviation of spread at $47^{\circ}$ close to being higher then the mean at $42^{\circ}$. The spread is very important to create a reliable policy training method. The variation at $53^{\circ}$ can once again be explained by some iterations learning to balance at the origin.
 \newline
 Figure \ref{fig:wxro} shows the performance against simulation time. This is to see if the greater performance is mainly due to additional data, and therefore better dynamics modelling. All the plots give similar results, with the most successful trials balancing for 2.5s with only 20s of experience. Interestingly there are a few tests at $53^{\circ}$ performing as badly as at $17^{\circ}$. This is due to the different balancing technique learnt, which follows a slower learning rate.
-
+%--------------------------------------------------
+\subsection{Wheel Size}
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\linewidth]{disp_wheel}
+  \caption{Performance distribution ($\pm \sigma $) when roll limit is $53^{\circ}$, and wheel size changes. }
+  \label{fig:whellsi}
+\end{figure}
+When testing a roll limit of $53^{\circ}$ the change in wheel size wasn't considered. A larger wheel is required for designs at this limit, and their effect must be determined. A larger wheel may effect performance as it increases torque output, and improves sensitivity. Simulations using 35 and 40mm wheels are shown in Figure \ref{fig:whellsi} and \ref{fig:exwh}. Evidently small changes to wheel size have no effect on learning rate as their difference can be explained by rollout randomness. For this reason the 35mm wheel at $47^{\circ}$  roll limit appears the best choice of design.
 %-----------------------------------
 \subsection{Sampling Time}
-Sampling time is another important factor to consider when optimising the training situation of the real unicycle. A faster sampling time effects the following:
+Sampling time is another important factor to consider when optimising the training situation of the real unicycle. However, this is a non-trivial parameters and therefore a faster rate would effect the following:
 
 \begin{itemize}
-\item Dynamics change slower and more linearly between readings, decreasing modelling complexity and improving predictions.
-\item A zero order hold controller is used on the motors, with torque calculated at the start of a step. As the unicycle moves this action is non optimum, therefore an error is introduced.
-\item More data points are collected, this can help build better models but at the expense of extra computational time.
-\item Every policy call injects noise into the predictions from process and measurement noise. This can cause a more uncertain trajectory prediction over the horizon time.
+\item Dynamic modelling; dynamics change slower and more linearly between readings, decreasing modelling complexity and improving predictions.
+\item Increased optimality; a zero order hold controller is used on the motors, with torque calculated at the start of a step. As the unicycle moves this action is non optimum, therefore an error is introduced.
+\item Additional data; this can help build better models but at the expense of extra computational time.
+\item Increased measurement noise; every policy call injects noise into the predictions from process and measurement noise. This can cause a more uncertain trajectory prediction over the horizon time.
 \end{itemize}
 
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\linewidth]{all_ts}
-   \caption{All rollouts}
+   \caption{Tests viewed individually}
   \label{fig:allts}
   \end{subfigure}
   \newline
   \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\linewidth]{disp_ts}
-    \caption{Distribution ( $\pm \sigma$)}
+    \caption{Performance distribution ( $\pm \sigma$)}
   \label{fig:dispts}
   \end{subfigure}
-  \caption{Effect of sampling time change}
+  \caption{Simulating timesteps effect of performance}
   \label{fig:st}
 \end{figure}
-Figure \ref{fig:st} shows the results of changing timestep for a roll limit of $42^{\circ}$. The extra computation time at 40ms resulted in tests lasting upwards of 40 hours compared to 4, as a result fewer simulations were conducted. The lower performing trial at 40ms showed promise as it learnt to balance in a different way to all other trials at this roll limit, it prioritised staying at the origin over staying upright. This shows that there is a possibility of the timestep greatly effecting learning ability. At the faster sample time the majority of trials learn faster for the initial 30 rollouts, after this performance became more similar between all trials, likely due to a finite horizon time being used. This shows that if enough iterations are performed you can eliminate the effect small changes to sample time have. For this reason a timestep of 50ms is a good compromise between learning rate and computation time.
+Figure \ref{fig:st} shows the results of changing timestep for a roll limit of $42^{\circ}$. The extra computation time at 40ms resulted in tests lasting upwards of 40 hours compared to 4, as a result fewer simulations were conducted.
+\newline
+With $\delta t$=40ms all trials except one learnt more rapidly. However, the lower performing trial showed promise as it learnt to balance in a different way to all other trials at this roll limit, it prioritised staying at the origin over just staying upright. Due to a limited horizon time the learning at 50ms caught up within 15 policy iterations.
+\newline
+The current trend suggests that further increasing sampling rate should improve learning. However, due to the complex relationship timestep has an other factors this may not be the case. The injection of noise from additional measurements will eventually outweigh the benefit of better dynamic modelling. This point will greatly depend upon real rollout performance so is hard to determine through simulations.
+\newline
+These simulations show that a timestep between 40-50ms is likely to be most optimum.  
+
 %---------------------------------------------
-\subsection{Wheel Size}
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=\linewidth]{disp_wheel}
-  \caption{Effect of wheel size when roll limit is 5=$53^{\circ}$}
-  \label{fig:whellsi}
-\end{figure}
-When testing a roll limit of $53^{\circ}$ the change in wheel size wasn't considered. A larger wheel may effect performance as it increases torque output, and improves sensitivity. To see these effects a wheel with 35mm  and 40mm radius were simulated. Figure \ref{fig:whellsi} shows that small changes to wheel size have no effect on learning rate as their difference is explained by rollout randomness. For this reason the 35mm wheel at $47^{\circ}$  roll limit appears the best choice of design.
 
 
 %-----------------------------
@@ -609,11 +621,11 @@ When testing a roll limit of $53^{\circ}$ the change in wheel size wasn't consid
   \newline  
   \begin{subfigure}[t]{0.6\textwidth}
     \includegraphics[width=\linewidth]{buildt}
-    \caption{Construction}
+    \caption{Start of assembly}
   \label{sub:con}
   \end{subfigure}
   
-  \caption{Drawings of new unicycle design}
+  \caption{Main sheet metal components in new unicycle }
   \label{fig:parts}
 \end{figure*}
 \clearpage
@@ -635,7 +647,7 @@ From simulations it was shown that increasing the roll limit to $47^{\circ}$ was
 \begin{figure}
   \centering
     \includegraphics[width=\linewidth]{place}
-  \caption{New design for higher roll limit}
+  \caption{New design for higher roll limit, demonstrating limit change from $17^{\circ}$ to $47^{\circ}$} 
   \label{fig:newline}
 \end{figure}
 
@@ -654,7 +666,7 @@ Design& Simplicity & Wear & Damping &Replacing & Total\\
 2&1& 4&4&3&12\\
 3&4&3 &4&3&14\\
 \end{tabular}
-\caption{Protection system analysis}
+\caption{Protection system analysis. With each category scored out of 5}
 \label{tab:pro}
 \end{table*}
 
@@ -703,7 +715,7 @@ Phone holder & 0.1 & 0.02 & 0 & 0.21 & 4.2 & 2.1 & 2.1 & 4.5 & 4.5 & 0.06\\
  &  & &  & 
  &  &  &  & 31.7 & 32.1 & 2.64\\
 \end{tabular}
-\caption{Moment of Inertia estimate}
+\caption{Moment of inertia estimate of parts and unicycle about wheel contact point. Axis defined as x forward, y sideways and z vertically}
 \label{tab:mot}
 \end{table*}
 
@@ -762,20 +774,20 @@ This new method greatly improved detection. However, some errors still occurred 
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{timestep}
-   \caption{Time between measurements}
+   \caption{Delay between consecutive measurements at sending and receiving ends}
   \label{fig:ts}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{delay}
-    \caption{Uncalibrated delay}
+    \caption{Uncalibrated time difference between sender and receiver}
   \label{fig:td}
   \end{subfigure}
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth]{both}
-    \caption{Different sampling times}
+    \caption{Delay when desired times are 25ms or 50ms}
   \label{fig:ts2}
   \end{subfigure}
-  \caption{Testing connecting by USB}
+  \caption{Testing connection between phone and Matlab using USB}
   \label{fig:usb}
 \end{figure*}
 \subsection{Phone}
@@ -813,7 +825,7 @@ Test& USB-A & USB-C & WIFI\\
 2&1.24& 1.26&1.25\\
 3&1.10&1.02 &1.84\\
 \end{tabular}
-\caption{Transmission delay $\sigma$ in ms}
+\caption{Transmission time $\sigma$ in ms}
 \label{table:td}
 \end{table}
 The delay over Three transmission mediums were compared in figure \ref{fig:med}. A smaller number on these graphs corresponds to a faster transmission. It was noticed that the difference between mediums was too large, this was explained when conducting the tests in different orders. The two clock times drifted apart after each test causing the exact delays to be incomparable, therefore flipping test order resulted in the opposite order to the figure. However, the variation in delay is what is most important when deciding method as this is what can cause unexpectedly long applied actions. Wifi showed some delays of nearly a whole time step in figure \ref{fig:med}. The standard deviation was calculated in Table \ref{table:td}. In test two the variation was almost identical amongst methods, but in the other tests wifi again showed greater variation. For this reason either USB connection is a better choice for use on the unicycle. However, the additional noise introduced by an extra cable effecting dynamics  may outweigh the transmission delay advantage and will need investigating. 
@@ -866,7 +878,7 @@ Equation \ref{eq:con} calculates the initial euler orientation. This can then be
     \caption{$\delta$t = 150ms}
   \label{fig:pi150}
   \end{subfigure}
-  \caption{Testing connecting from Matlab to Pi using Matlab system command}
+  \caption{Connection speed breakdown between Matlab and Pi using the Matlab "system" command}
   \label{fig:pi}
 \end{figure*}
 Connection to the Raspberry Pi is done using the Matlab support package for Pi devices \cite{pi}. An initial set-up is required for this package. Involving connecting the Pi using a Ethernet cable, and following the package installation guide using the Raspberry Pi 3 Matlab image. Once set up the following command can be run in Matlab:
@@ -908,7 +920,7 @@ The script is terminated by sending \# in this command, instead of numbers.
 \begin{figure}
   \centering
     \includegraphics[width=\linewidth]{50ms_udp}
-  \caption{Testing connection to Pi sending torques by UDP}
+  \caption{Connection speed breakdown between Matlab and Pi using UDP}
   \label{fig:piudp}
 \end{figure} 
 
@@ -1013,7 +1025,7 @@ Key &  \qquad	\textcolor{Maroon}{Mechanical} \qquad
 \textcolor{MidnightBlue}{Electrical} 	\qquad
 \textcolor{ForestGreen}{Software} \\
 \end{tabular}
-\caption{}
+\caption{Changes made over project duration categorised by design area }
 \label{tab:Timeline}
 \end{table}
 
@@ -1050,9 +1062,15 @@ Both positive and negative pulses require counting to accurately determine speed
 \begin{figure*}
   \centering
     \includegraphics[width=\linewidth,height = 8cm]{place}
-  \caption{Optimum torque directions}
+  \caption{Optimum torque directions for flywheel and wheel in locations spanned by [$\theta ,\psi_f$]}
   \label{fig:quad}
 \end{figure*} 
+%----------------------
+\subsection{State Calculation}
+The new communication systems were shown to be equally reliable at faster speeds around up to 15ms. This allows the possibility of calculating current state and constant checking more frequently without decreasing the learnt dynamic timestep.
+\newline
+This would involve updating the current state multiple times per dynamic timestep. Doing so could increase the state accuracy as dynamics are more linear. however, increasing measurements will introduce more noise which may outweigh the benefit. 
+%----------------------------------
 \subsection{Quadratic Controller}
 All simulations and rollouts conducted so far have used a linear policy control function to determine the best action from the current state as in equation \ref{eq:lin}. There is the question of whether a linear policy is sufficient to control a unicycle. A quadratic policy of the form of equation \ref{eq:quad} may be more suitable.
 \begin{equation}
@@ -1086,7 +1104,7 @@ Currently the unicycle is incapable of running independent from a computer. This
 
 
 \begin{thebibliography}{56}
-\bibitem[1990. Vos, Flotow]{other3}
+\bibitem[1990. Vos, Von Flotow]{other3}
 D. W. Vos and A. H. Von Flotow, ''Dynamics and nonlinear adaptive control of an
 autonomous unicycle: Theory and experiment,'' in 29th IEEE Conference on Decision
 and Control, pp. 182{187, IEEE, 1990.}
@@ -1135,6 +1153,9 @@ Jay Hamlin. 2013. \url{https://www.raspberrypi.org/forums/viewtopic.php?f=72&t=3
  
 \bibitem[2016. Mcallister]{exp}
 Rowan McAllister. 2016. ''Predicting Next-Step Loss Distributions in PILCO''
+
+\bibitem[2016. Tukiainen]{tuk}
+Aleksi Tukiainen. ''The Self-Learning Unicycle''. MEng Thesis. CUED, 2016.
 
 \bibitem[2017. Weiser]{eric}
 Eric Weiser. ''Robotic Unicycle'' . MEng Thesis. CUED. 2017
