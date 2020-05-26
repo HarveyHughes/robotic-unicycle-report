@@ -41,10 +41,11 @@
 \BOOKMARK [2][-]{subsection.8.1}{Progress}{section.8}% 41
 \BOOKMARK [2][-]{subsection.8.2}{Future Work}{section.8}% 42
 \BOOKMARK [3][-]{subsubsection.8.2.1}{Encoder}{subsection.8.2}% 43
-\BOOKMARK [2][-]{subsection.8.3}{State Calculation}{section.8}% 44
-\BOOKMARK [2][-]{subsection.8.4}{Quadratic Controller}{section.8}% 45
-\BOOKMARK [3][-]{subsubsection.8.4.1}{Exploration}{subsection.8.4}% 46
-\BOOKMARK [3][-]{subsubsection.8.4.2}{Removing Matlab from rollouts}{subsection.8.4}% 47
-\BOOKMARK [1][-]{section.9}{Appendix}{}% 48
-\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 49
-\BOOKMARK [2][-]{subsection.9.2}{Covid-19}{section.9}% 50
+\BOOKMARK [3][-]{subsubsection.8.2.2}{State Calculation}{subsection.8.2}% 44
+\BOOKMARK [3][-]{subsubsection.8.2.3}{Quadratic Controller}{subsection.8.2}% 45
+\BOOKMARK [3][-]{subsubsection.8.2.4}{Exploration}{subsection.8.2}% 46
+\BOOKMARK [3][-]{subsubsection.8.2.5}{Removing Matlab from rollouts}{subsection.8.2}% 47
+\BOOKMARK [3][-]{subsubsection.8.2.6}{Unicycle release}{subsection.8.2}% 48
+\BOOKMARK [1][-]{section.9}{Appendix}{}% 49
+\BOOKMARK [2][-]{subsection.9.1}{Risk Assessment Review}{section.9}% 50
+\BOOKMARK [2][-]{subsection.9.2}{COVID-19 Disruption}{section.9}% 51

@@ -53,7 +53,7 @@
 \pagestyle{fancy} % All pages have headers and footers
 \fancyhead{} % Blank out the default header
 \fancyfoot{} % Blank out the default footer
-\fancyhead[C]{5584F $\bullet$ May 2020 $\bullet$ Harvey Hughes} % Custom header text
+\fancyhead[C]{Robotic Unicycle $\bullet$ May 2020 $\bullet$ Harvey Hughes} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{titling} % Customizing the title section
@@ -114,7 +114,7 @@
 %\textsc{Final Report} \\
 %\\
 \textsc{Harvey Hughes} \\
-\textsc{Supervisor:Professor Carl Rasmussen} \\
+\textsc{Supervisor: Professor Carl Rasmussen} \\
 }
 \date{\today} % Leave empty to omit a date
 \renewcommand{\maketitlehookd}{%
@@ -126,31 +126,34 @@
 \begin{document}
 \onecolumn
 % Print the title
+\includepdf{coversheet_signed}
+
+\pagenumbering{arabic}
 \maketitle
 
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 
 \section*{Technical Abstract}
-The application of machine learning to determine effective controllers opposed to using control theory could prove to be highly useful when its not possible to determine system dynamics. This would mean new complex tasks could be tackled with minimal knowledge about system behaviour.  A robotic unicycle is considered in this project to provide a complex enough problem to fully test the PILCO algorithm. While successful in simulations, real success on unicycle models has been more challenging. 
+The application of machine learning in determining effective controllers opposed to using control theory could prove to highly useful when its not possible to determine system dynamics. This means new and complex tasks could be tackled with minimal knowledge about system behaviour.  A robotic unicycle is considered in this project to provide a sufficiently complex problem to fully test the PILCO algorithm and its success outside simulations.
 \newline
 \newline
-This project builds upon previous students work dating back to 2005. Throughout the projects history the unicycle being tested has evolved from a large and dangerous model, to a smaller model five years ago. in addition to model change different control algorithms have been used and extensively built up. 
+This project builds upon previous students work dating back to 2005. Throughout the projects history the unicycle being tested has evolved from a large and dangerous model, to a smaller model five years ago. In addition to model change, different control algorithms have been used and extensively built up. 
 \newline
 \newline
 The last two years of project work has seen significant improvements and simplifications to the software and electronics. This helped to pinpoint bottle-necks in the learning process but unfortunately the smaller unicycle showed great difficulty at balancing.
 \newline
 \newline
-Speculation that the unicycle roll limit of $17^{\circ}$ impeded learning was thoroughly investigated among additional variables by running simulations. The simulations showed that a mechanical redesign is necessary for learning to occur. This design aimed to upgrade and simplify the physical robot to match the progress made in electrical and software. The new design has a roll limit of $47^{\circ}$, softens fall impact and reliably attaches all sensors. 
+Speculation that the unicycle roll limit of $17^{\circ}$ impeded learning was thoroughly investigated among other variables through simulations. These simulations showed that a mechanical redesign is necessary for learning to occur. This design aimed to upgrade and simplify the physical robot to match the progress made in electronics and software. The new design has a roll limit of $47^{\circ}$, softens impacts and reliably attaches sensors. 
 \newline
 \newline
-Numerous problems were found in the old communications methods between phone, computer and Raspberry Pi. These problems introduced large variation in delay between readings, and operated too slowly to provide sufficient learning. For sufficient learning a frequency above 20Hz was shown to be required. To solve these issues and provide additional simplicity UDP protocols were implemented for all transmissions. Unifying all transmissions this was enables the possibility of removing a computers involvement should it be desired in future.
+Numerous problems were found in existing communications methods between phone, computer and Raspberry Pi. These problems introduced large variation in delay between readings, and operated too slowly to provide sufficient learning. For sufficient learning a frequency above 20Hz was shown to be required. To solve these issues and provide additional simplicity UDP protocols were implemented for all transmissions. Unifying all transmissions enables the possibility of removing a computers involvement should it be desired in future.
 \newline
 \newline
-Upon starting rollouts further problems were located and fixed. The initial orientation was measured to remove offsets created in the dynamics being learnt and therefore improve accuracy. Trajectories end when the unicycle hits the ground, this detection proved to be unreliable and rollouts became invalid. Additional constraint checks involving future predictions were implemented in addition to manual confirmation.
+Upon starting rollouts further problems were located and fixed. The initial orientation was measured to remove offsets created in the dynamics learnt and therefore improve model accuracy. Trajectories end when the unicycle hits the ground, this detection proved to be unreliable and rollouts became invalid. Additional constraint checks involving future predictions were implemented in addition to manual confirmation.
 \newline
 \newline
-Unfortunately few rollouts were conducted due to problems charging the battery during the Covid-19 lockdown. The rollouts performed demonstrated........
+Unfortunately few rollouts were conducted due to problems charging the battery during the COVID-19 lockdown. The rollouts performed showed little progress at learning, but this is attributed to low battery and insufficient policy optimisations.
 \newline
 \newline
 During simulations and real rollouts policy optimisation often plateaued, or only learnt to wander instead of stay at the origin. The implementation of a quadratic controller and policy exploration techniques is believed to alleviate these issues.
@@ -204,11 +207,7 @@ The problem was originally being solved using control theory approaches. This in
 In 2010 Mchutchon \cite{mchut} applied the RMLC (Reinforced Model Learnt Control) algorithm developed by Rasmussen and Deisenroth to the unicycle, and archived balancing of a unicycle with stabilisers. In 2011 building upon Mchutcons work Queiro \cite{roderigo} and Douglass \cite{douglass} were able to modify the unicycle to balance unrestrained for up to 5 seconds. 
 \newline
 The size of the unicycle posed serious safety risks, both in terms of large power usage and the need to limit the unicycle during tests. One way this was done was by attaching to bike racks \cite{neil} or suspending the unicycle from the department atrium ceiling \cite{roderigo}. These methods while reducing the risk didn't eliminate it, and caused unnecessary restrictions and disturbances to the unicycle dynamics. 
-\newline
-To increase safety a small model unicycle was constructed in 2015 by Tukiainen \cite{tuk} as in figure \ref{sub:old2}. PILCO was also implemented on the unicycle \cite{pilco}. The increased safety of the smaller unicycle allowed unconstrained motion to be tested more easily. Problems balancing the unicycle longer than 2s were encountered at this point, with concerns about identifying the cause for problems. In 2017 an overhaul of the software was done by Wieser \cite{eric}, and in 2019 an electrical overhaul by Harris \cite{arsalan}. This was to simplify the system and allow for more accurate troubleshooting. 
-\newline
-At the project start the pre-existing work consisted of: Small model unicycle with Rasperry Pi electronics and phone sensor, and updated PILCO toolbox including simulation model of unicycle model. The current state of unicycle is discussed in more detail in section III. 
-\begin{figure*}[t!]
+\begin{figure*}[hb!]
   \centering
   \begin{subfigure}[t]{0.325\textwidth}
     \includegraphics[width=\linewidth,height=7.5cm]{other1}
@@ -223,6 +222,10 @@ At the project start the pre-existing work consisted of: Small model unicycle wi
   \caption{Other Unicycle designs}
   \label{fig:otheruni}
 \end{figure*}
+To increase safety a small model unicycle was constructed in 2015 by Tukiainen \cite{tuk} as in figure \ref{sub:old2}. PILCO was also implemented on the unicycle \cite{pilco}. The increased safety of the smaller unicycle allowed unconstrained motion to be tested more easily. Problems balancing the unicycle longer than 2s were encountered at this point, with concerns about identifying the cause for problems. In 2017 an overhaul of the software was done by Wieser \cite{eric}, and in 2019 an electrical overhaul by Harris \cite{arsalan}. This was to simplify the system and allow for more accurate troubleshooting. 
+\newline
+At the project start the pre-existing work consisted of: Small model unicycle with Rasperry Pi electronics and phone sensor, and updated PILCO toolbox including simulation model of unicycle model. The current state of unicycle is discussed in more detail in section III. 
+
 
 %---------------------------
 \subsection{Examples of other unicycles}
@@ -313,7 +316,7 @@ A GP eliminates model bias as a group of functions are fit to the observed data.
 
 \subsection{PILCO}
 In policy optimisation an algorithm called PILCO \cite{pilco} will be used.
-PILCO is an example of an optimum control algorithm. These algorithms will optimise a policy to decide the best action $\textbf{u}$ given the unicycles state.
+PILCO is an example of an optimum control algorithm. These algorithms will optimise a policy to decide the best action $\textbf{u}$ given the unicycles state $\textbf{x}$ .
 Optimum actions are determined by evaluating the expected loss over a horizon under the current policy, as in equation \ref{eq:pilco}. 
 
 \begin{equation}
@@ -543,9 +546,9 @@ Sampling time is another important factor to consider when optimising the traini
 \end{figure}
 Figure \ref{fig:st} shows the results of changing timestep for a roll limit of $42^{\circ}$. The extra computation time at 40ms resulted in tests lasting upwards of 40 hours compared to 4, as a result fewer simulations were conducted.
 \newline
-With $\delta t$=40ms all trials except one learnt more rapidly. However, the lower performing trial showed promise as it learnt to balance in a different way to all other trials at this roll limit, it prioritised staying at the origin over just staying upright. Due to a limited horizon time the learning at 50ms caught up within 15 policy iterations.
+With $\delta t$=40ms all trials except one learnt more rapidly. However, the lower performing trial showed promise as it learnt to balance in a different way to all other trials at this roll limit, it prioritised staying at the origin over just staying upright. Due to a finite horizon time the learning at 50ms caught up within 15 policy iterations.
 \newline
-The current trend suggests that further increasing sampling rate should improve learning. However, due to the complex relationship timestep has an other factors this may not be the case. The injection of noise from additional measurements will eventually outweigh the benefit of better dynamic modelling. This point will greatly depend upon real rollout performance so is hard to determine through simulations.
+The current trend suggests that further increasing sampling rate should improve learning. However, due to the complex relationship timestep has on other factors this may not be the case. The injection of noise from additional measurements will eventually outweigh the benefit of better dynamic modelling. This point will greatly depend upon real rollout performance so is hard to determine through simulations.
 \newline
 These simulations show that a timestep between 40-50ms is likely to be most optimum.  
 
@@ -646,7 +649,8 @@ From simulations it was shown that increasing the roll limit to $47^{\circ}$ was
 
 \begin{figure}
   \centering
-    \includegraphics[width=\linewidth]{place}
+    \includegraphics[width=\linewidth]{tiltold}
+    \includegraphics[width=\linewidth]{tiltnew2}
   \caption{New design for higher roll limit, demonstrating limit change from $17^{\circ}$ to $47^{\circ}$} 
   \label{fig:newline}
 \end{figure}
@@ -688,7 +692,7 @@ The previous method of mounting the phone used elastic bands. This resulted in l
 \newline
 To have reliable and repeatable phone position the attachment must resisting all degrees of freedom and have at least 3 reference planes for repeatable phone alignment. Due to these strict requirements and desire for size variability it was decided to use an existing phone mounting system. This would increase part size, but provide the desired functionality without needing to fabricate complicated parts. Different bike and car mounts were evaluated with the Greyfay PB04AC bike mount eventually chosen \cite{bike}. This mounts onto a handlebar like design at the top of the unicycle as in figure \ref{sub:topnew}. 
 \newline
-The Raspberry Pi was attached using long bolts located on the opposite side to the phone. In addition to the battery these were located slightly off centre, see figure \ref{sub:backnew}. This countered the off centred motor position for the wheel, and successfully brought the CoM to the centre. The Pi was located further away from the central plane of the unicycle then desired, this was due to the inability to find suitably short screws, and spacers because of closures due to Covid-19. By shortening these screws the moment of inertia would reduce and could improve unicycle balance.  
+The Raspberry Pi was attached using long bolts located on the opposite side to the phone. In addition to the battery these were located slightly off centre, see figure \ref{sub:backnew}. This countered the off centred motor position for the wheel, and successfully brought the CoM to the centre. The Pi was located further away from the central plane of the unicycle then desired, this was due to the inability to find suitably short screws, and spacers because of closures due to COVID-19. By shortening these screws the moment of inertia would reduce and could improve unicycle balance.  
 %--------------------------------------
 \subsubsection{Material}
 On the old unicycle model a copper coated fibre glass was used, as it had high stiffness but low weight. Due to designing within solidworks and requiring some machined parts the EDG office who manufactured the parts last time were unable to help again. Therefore a change in material was required to 1.6mm plate aluminium, with the manufacturing done in the Dyson centre workshop. This ensured that the frame would be stiff enough to limit unwanted vibrations without adding too much weight. 
@@ -736,7 +740,7 @@ The time required for the unicycle to fall without motor input can be calculated
 
 %--------------------------------------
 \subsection{Design Evaluation}
-While constructing the unicycle it was apparent that the new design was more rigid and adaptable then the last model. Having the flywheel protection disks made out of one piece, instead of two welded together was the main source of this additional strength. The addition of the bolts and extra room also made assembling the model much easier which is promising if future modifications are needed. Some bolts are currently missing due to the inability to acquire more during the lockdown period of Covid-19. The addition of these bolts and ensuring all bolts and cable ties are attached tightly is very important for minimising vibrational noise in future test runs.
+While constructing the unicycle it was apparent that the new design was more rigid and adaptable then the last model. Having the flywheel protection disks made out of one piece, instead of two welded together was the main source of this additional strength. The addition of the bolts and extra room also made assembling the model much easier which is promising if future modifications are needed. Some bolts are currently missing due to the inability to acquire more during the lockdown period of COVID-19. The addition of these bolts and ensuring all bolts and cable ties are attached tightly is very important for minimising vibrational noise in future test runs.
 \newline
 The attachment of the Pi and phone proved very successful, allowing access to all the ports on both devices. The handle bar was a secure way of attachment allowing for adequate variation in either phone orientation or size. Due to the mounting at the top of the unicycle the moment of inertia about the wheel when falling is increased by around 50\%, as seen in table \ref{tab:mot}. This doesn't appear to be adversely affecting the unicycle performance as falling occurs slow enough to react to. To improve this in future weight could be removed from the inside of the handle bar, or mounting holes could be moved lower down the back plate. This movement would also reduce the vibrations carried up this plate, which add unwanted noise to the sensor readings. Once again this problem doesn't appear to be too large and much easier methods of reduction could be implemented such as stiffeners attached to the plate edges.
 \newline
@@ -747,17 +751,17 @@ Due to a change in material and slightly increase in size the overall weight of 
 %--------------------------------------
 \clearpage
 \twocolumn[\section{Software Changes}]
-A number of problems were detected in the software running a real rollout. These faults were constraint detection and state calculation.
+A number of problems were detected in the software for running a real rollout. These faults were constraint detection and state calculation. 
 \subsection{State Calculation}
-Previously state calculations incorrectly assumed wheel and flywheel angular velocities was directly the input torques. A slight correction to include gearing ratio, and no load speed was required to fix this. Additionally x,y position was reset at each measurement and therefore needed correcting.
+Previously state calculations incorrectly assumed wheel and flywheel angular velocities equalled the input torques. A slight change to include gearing ratio, and no-load speed was required. Additionally x,y position were reset at each measurement and therefore needed correcting.
 \subsection{Constraint Detection}
-When the unicycle hits the floor the rollout should terminate and trim any readings made after the impact. This is the ensure training occurs on valid dynamic data, and the unicycle can't cause damage while fallen over. It was noted that this detection was unreliable and often failed.
+When the unicycle hits the floor the rollout should terminate and trim any readings made after the impact. This is to ensure training occurs on valid dynamic data, and the unicycle can't cause damage while fallen over. It was noted that this detection was unreliable and often failed.
 \newline
-The process of constraint detection followed: Implement policy \textbf{u}=$\pi (\textbf{x})$ $\rightarrow$ Get measurement $\rightarrow$ Calculate next state, if constraint exceeded then terminate. This caused problems because the constraints are checked under the current state, which is calculated using current $\boldsymbol{ \omega }$ and last $\delta t$. Had the collision occurred between the last two measurements then the current state would be calculated using $\boldsymbol{\omega}$ after an impact, therefore incorrectly calculation angle.
+The process of constraint detection followed: Implement policy \textbf{u}=$\pi (\textbf{x})$ $\rightarrow$ Get measurement $\rightarrow$ Calculate next state, if constraint exceeded then terminate. This caused problems because the constraints are checked under the current state, which is calculated using current $\boldsymbol{ \omega }$ and last $\delta t$. Had the collision occurred between the last two measurements then the current state would be calculated using $\boldsymbol{\omega}$ after an impact, therefore incorrectly calculation the angle.
 \newline
-In order to remedy this error a prediction one step into the future was added. This position was then checked against the constraints and noted for next timestep if exceeded. To check if a collision occurred as predicted $\boldsymbol{\omega}$ is checked against the last position. In the event of a collision the impact would cause large accelerations in approximately opposite direction to before impact. These accelerations would be larger then those possible with a change in torque meaning thresholding could detect collisions.
+In order to remedy this error predictions one step into the future were added. This position was then checked against the constraints and noted if exceeded. To check if a collision occurred as predicted, current $\boldsymbol{\omega}$ is checked against last $\boldsymbol{\omega}$ using a dot product. In the event of a collision the impact would cause large accelerations in approximately opposite direction to before impact. These accelerations would be larger then those possible with a change in torque meaning thresholding could detect collisions.
 \newline
-This new method greatly improved detection. However, some errors still occurred meaning a manual check was introduced into rollouts to ensure valid data was passed into PILCO. 
+This new method greatly improved detection. However, some errors still occurred meaning a manual check was introduced into rollouts to ensure valid data gets passed into PILCO. 
 
 
  
@@ -984,10 +988,57 @@ Figure \ref{fig:piudp} shows the success this method has at bringing the timeste
 \twocolumn
 %----------------------------
 \subsubsection{Tests}
-Due to limited access to the department caused by lockdown, and inability to find the correct cable for the battery charger minimal tests were conducted. The results of these tests can be seen in figure \ref{}. Limited success at balancing was achieved, this is likely attributed to low battery charge and insufficient rollouts performed. It was noticed that in one test the original policy learnt set the flywheel torque to maximum, and only after subsequent optimisations was this changed. This could signify the flywheel is currently too small for the unicycle, and a larger one may be required.
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}[t]{0.49\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{1-0}
+   \caption{Test 1: $\delta t$=50ms}
+  \label{fig:t1}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{2-0}
+    \caption{Test 2: $\delta t$=45ms}
+  \label{fig:t2}
+  \end{subfigure}
+  \caption{Initial 10 rollouts using random controller in real tests}
+  \label{fig:init}
+\end{figure*}
+
+The test procedure explained above was implemented for all rollouts. This helped to ensure repeatability across tests and that no parts are forgotten when running them.
+\begin{figure}
+  \centering
+    \includegraphics[width=\linewidth]{summary}
+  \caption{Real rollout performance with $\delta t$ changed, the initial 10 rollouts use a random controller}
+  \label{fig:rsum}
+\end{figure} 
+Due to limited access to the department during lockdown, and inability to find the correct cable for the battery charger minimal tests were conducted. The results of two partial tests can be seen in figure \ref{fig:rsum}, demonstrating longer fall times as expected over the old unicycle. Limited success is observed with the slight upward trend not exceeding the variation when using random controllers. This slow learning is likely due to insufficient policy optimisations and low battery. The large variation in performance under random rollouts could be caused by imperfect unicycle release. By examining the trajectories in figure \ref{fig:init} it's clear that the unicycle angles don't change much initially, likely due to the unicycle still being held. To fix this issue various measures could be implemented. A button could be introduced that once released initiated rollouts. However, an easier fix may be to warn the user with an LED flash, then initiate rollouts 0.25s later to account for reaction times.
+\newline
+Figure \ref{fig:init} also shows that falls forward and backward occur often. However, more rollouts fall towards negative roll and positive yaw. This unevenness is likely due to a slight CoM imbalance, the effect on learning rate is so far undetermined but shouldn't prove problematic as an effective controller would be able to deal with an offset. 
+\newline
+Figure \ref{fig:rper} shows the the trajectories after policy optimisation in both tests. These results further show that some learning has occurred but due to limited trials it was insufficient to balance.
+
 
 %---------------------------------
-
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}[t]{\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{1-12}
+   \caption{Test 1 - After 12 optimisations}
+  \label{fig:t112}
+  \end{subfigure}
+  \newline
+  \begin{subfigure}[t]{\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{2-1}
+    \caption{Test 2 - After 1 optimisation}
+  \label{fig:t21}
+  \end{subfigure}
+  \caption{Trajectory and loss information for both tests, displaying past policy optimisations. Light blue regions show predicted state distributions, with dark blue showing an updated prediction.}
+  \label{fig:rper}
+\end{figure*}
 
 \clearpage
 
@@ -1005,7 +1056,7 @@ Due to limited access to the department caused by lockdown, and inability to fin
 & \textcolor{Maroon}{$\bullet$} Draft new unicycle designs \\
 & \textcolor{ForestGreen}{$\bullet$} Simulate roll limits \\
 & \textcolor{MidnightBlue}{$\bullet$} Redesign and test communication to phone \\
-& \textcolor{ForestGreen}{$\bullet$} Implement original state measurement \\
+& \textcolor{ForestGreen}{$\bullet$} Implement initial state measurement \\
 \cmidrule(r{4em}){1-2}
 \parbox[t]{2mm}{\multirow{6}{*}{\rotatebox[origin=c]{90}{Lent}}} & \textcolor{ForestGreen}{$\bullet$} Simulate wheel size\\
 & \textcolor{ForestGreen}{$\bullet$} Simulate timestep \\
@@ -1039,13 +1090,13 @@ This project continues on from previous years work. The unicycle was shown to be
 \newline
 The work conducted on this project has taken a variety of forms as mechanical, electrical and software changes were required. A summary of this is seen in table \ref{tab:Timeline}. This can be broken down into simulations evaluating important parameters for learning, mechanical redesign implementing these discoveries and improving old communication systems to reduce noise and variation.
 \newline
-Initially simulations were conducted to establish the effect certain parameters had on learning. It was found that a new model was required for learning to occur due to the inability to learn at roll limits as low as $17^{\circ}$. Simulations different timesteps also provided additional insight. By reducing timestep from 50ms to 40ms learning occurred with fewer policy iterations, even allowing controllers to learn to balance at the origin and not wander off. The reason for this improvement is due to; increased linearity, additional data, and optimum torques active for longer. However, at 40ms the training time could be 10x longer then at 50ms. For this reason additional experiments should be conducted to determine the best timestep between 40-50ms to compromise speed and effectiveness. 
+Initially simulations were conducted to establish the effect certain parameters had on learning. It was found that a new model was required for learning to occur due to the inability to learn at roll limits as low as $17^{\circ}$. By reducing timestep from 50ms to 40ms in simulations, learning occurred with fewer policy iterations, even allowing controllers to learn to balance at the origin and not wander off. The reason for this improvement is due to; increased linearity, additional data, and optimum torques active for longer. However, at 40ms the training time could be 10x longer then at 50ms. For this reason additional experiments should be conducted to determine the best timestep between 40-50ms to compromise speed and effectiveness. 
 \newline
-As simulations showed inadequate learning on the current unicycle model, a new model was designed. This model would also address problems in fall protecting, sensor stability and repeatable test procedures. The design increased the roll constraint to $47^{\circ}$, increased simplicity while maintaining rigidity. The increased size of unicycle sparked worries about insufficient motor power. However, simple changes could be made to correct this if required.   
+As simulations showed inadequate learning on the current unicycle model, a new model was designed. This model would also address problems in fall protecting, sensor stability and repeatable test procedures. The design increased the roll constraint to $47^{\circ}$, increased simplicity while maintaining rigidity. The increased size of unicycle sparked worries about insufficient motor power. However, calculations showed this may not be problematic. Simple changes could be made to correct this if required.   
 \newline
-Data communication between Matlab, phone and Raspberry Pi was completely redesigned. Delays in wifi communication and sending motor commands were solved by changing all transmissions to use UDP protocols. An additional benefit of this approach enables direct communication between Pi and phone. This means that in future rollouts could be performed without an attached computer.
+Testing data communication between Matlab, phone and Raspberry Pi highlighted flaws and caused a complete redesign. Delays in wifi communication and sending motor commands were solved by changing all transmissions to use UDP protocols. An additional benefit of this approach enables direct communication between Pi and phone. This means that in future rollouts could be performed without an attached computer.
 \newline
-Unfortunately few real rollouts were conducted..
+Unfortunately few real rollouts were conducted due to issues locating a battery charger. The few tests conducted confirmed a longer fall time of the new model compared to the old one. However, due to insufficient optimisations little progress at learning was observed. 
 
 
 %------------------------------
@@ -1056,47 +1107,70 @@ The last three years of project work have seen updates to the software, electric
 \subsubsection{Encoder}
 Currently the wheel and flywheel angular velocities are calculated using the input torques. This approximates the relationship to be linear, which becomes less true the faster and further from upright the unicycle becomes. This approximation causes inaccuracies in the trained dynamics model introducing process noise, and increases learning complexity. 
 \newline
-In order to correct this error the motors should be measured directly. This is done using the attached encoders \cite{encoder}. Pulses are generated 512 times per revolution, which under normal motor speeds produces pulse frequencies up to 50kHz.
+In order to correct this error the motors should be measured directly. This can be done using the attached encoders \cite{encoder}. Pulses are generated 512 times per revolution, which under normal motor speeds produces pulse frequencies up to 50kHz.
 \newline
 Both positive and negative pulses require counting to accurately determine speeds. This could be done using additional hardware or for simplicity interrupt routines on the Pi \cite{interrupt}. The motor states could then be transmitted to Matlab simply using UDP.
-\begin{figure*}
+
+\begin{figure*}[t]
   \centering
-    \includegraphics[width=\linewidth,height = 8cm]{place}
-  \caption{Optimum torque directions for flywheel and wheel in locations spanned by [$\theta ,\psi_f$]}
+  \begin{subfigure}[t]{0.325\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{wheel}
+   \caption{Wheel torque. \textcolor{ForestGreen}{+ve}, \textcolor{Maroon}{-ve}}
+  \label{fig:wt}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{flywheel}
+    \caption{Flywheel torque. \textcolor{ForestGreen}{+ve}, \textcolor{Maroon}{-ve}}
+  \label{fig:fwt}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.325\textwidth}
+  \centering
+    \includegraphics[width=\linewidth]{quadpos}
+    \caption{Optimum turning direction \cite{roderigo}}
+  \label{sub:pos}
+  \end{subfigure}
+  \caption{Optimum torque directions for flywheel and wheel in locations spanned by [$\theta ,\psi_f$], and Optimum turning direction in [x,y] plane.}
   \label{fig:quad}
-\end{figure*} 
+\end{figure*}
+
 %----------------------
-\subsection{State Calculation}
-The new communication systems were shown to be equally reliable at faster speeds around up to 15ms. This allows the possibility of calculating current state and constant checking more frequently without decreasing the learnt dynamic timestep.
+\subsubsection{State Calculation}
+The new communication systems were shown to be as reliable at smaller timesteps down to 15ms. This allows the possibility of calculating current state and constraint checking more frequently without decreasing the learnt dynamic timestep.
 \newline
-This would involve updating the current state multiple times per dynamic timestep. Doing so could increase the state accuracy as dynamics are more linear. however, increasing measurements will introduce more noise which may outweigh the benefit. 
+This would involve updating the current state multiple times per dynamic timestep. Doing so could increase the state accuracy as dynamics are more linear. However, increasing measurements will introduce more noise which may outweigh the benefit. 
 %----------------------------------
-\subsection{Quadratic Controller}
+\subsubsection{Quadratic Controller}
 All simulations and rollouts conducted so far have used a linear policy control function to determine the best action from the current state as in equation \ref{eq:lin}. There is the question of whether a linear policy is sufficient to control a unicycle. A quadratic policy of the form of equation \ref{eq:quad} may be more suitable.
 \begin{equation}
 \pi (\textbf{x}) = \textbf{Wx}+\textbf{p}
 \label{eq:lin}
 \end{equation}
-Figure \ref{fig:quad} depicts the optimum action to be taken for the state space covered by [$\theta ,\psi_f$]. This ideal action is the action which minimises the distance or angle moved in that direction to return the unicycle to the desired position of [$\theta ,\psi_f$] = [0,0]. 
+Figure \ref{fig:quad} depicts the optimum action to be taken for the state space covered by [$\theta ,\psi_f$], and [x,y]. This ideal action is the action which minimises the distance or angle moved in that direction to return the unicycle to the desired position of [$\theta ,\psi_f$,x,y] = [0,0,0,0]. 
 \newline
-To correct pitch a linear policy is clearly sufficient. When the unicycle tilts forward a negative torque on the wheel is desired, and vice versa for backwards tilt. However, when looking at correcting both pitch and roll a quadratic policy appears to be required. This can be easily visualised as the flywheel rotating away from the vertical axis within each quadrant. The vertical axis corresponds to a correction in just pitch which is linear. A torque away from this position results in the unicycle moving towards it. This means that the direction of torque required on the flywheel alternates between each quadrant, and is effectively an XOR problem. \cite{roderigo} 
+To correct pitch a linear policy is clearly sufficient. When the unicycle tilts forward a negative torque on the wheel is desired, and vice versa for backwards tilt. However, when looking at correcting both pitch and roll a quadratic policy appears to be required for the flywheel. This can be easily visualised as the flywheel rotating away from the vertical axis within each quadrant. The vertical axis corresponds to a correction in just pitch which is linear. A torque away from this position results in the unicycle moving towards it. This means that the direction of torque required on the flywheel alternates between each quadrant, and is effectively an XOR problem. \cite{roderigo}. A similar issue is present when navigating back to the origin as in figure \ref{sub:pos}.
 \begin{equation}
 \pi (\textbf{x}) = \textbf{x}^T\textbf{Qx} + \textbf{Wx} + \textbf{p}
 \label{eq:quad}
 \end{equation}
-Upon further thought this may not be a problem. The optimal solution may be quadratic but by rotating the other direction the same axis where only pitch is being corrected can be achieved. This can involve a much larger angle of up to $180^{\circ}$ to work. When roll is small the two directions become more similar, and therefore shouldn't pose a problem for most states the unicycle will visit. This non optimal route allows a linear policy to work where two quadrants have the optimal torque direction and two have the sub-optimal direction. Weiser believed that with a linear controller the unicycle learnt to either always fall forward or backwards in order to remain in the optimal regions. \cite{eric}
+Upon further thought this may not be a problem. The optimal solution may be quadratic but by rotating the other direction the same axis where only pitch is being corrected can be achieved. This can involve a much larger angle of up to $180^{\circ}$ to work. When roll is small the angle turned in both directions become more similar, and therefore shouldn't pose a problem for most states the unicycle will visit. This non-optimal route allows a linear policy to work where two quadrants have the optimal torque direction and two have the sub-optimal direction. Weiser believed that with a linear controller the unicycle learnt to either always fall forward or backwards in order to remain in the optimal regions. \cite{eric}
 \newline
 Testing using quadratic policies could be performed in future to allow an exact evaluation of using a linear approximation. This approximation is useful because the policy parameters optimised over are greatly reduced in a linear model. Therefore training speed is far quicker.
 \subsubsection{Exploration}
 During simulated rollouts it became clear that it was likely policy optimisation could plateau. After this only minor improvements to trajectories were made. This may be caused by a linear policy being inadequate and therefore only so much progress is possible, normally resulting in trajectories drifting around the origin.
 \newline
-Another possible fix is to introduce policy exploration. Currently the policy iteratively optimised based off observed data, called exploitative learning. This means that local optimum can stop learning, and unvisited areas of the state space will not be explored. Exploring these areas, or jumping outside of current policy optimisations may be required to effectively learn the problem, even if this requires additional computation time. 
+Another possible fix is to introduce policy exploration. Currently the policy iteratively optimised based off observed data with control decisions based entirely on these observations, called exploitative learning. This means that local minima can stop learning, and unvisited areas of the state space will not be explored. Exploring these areas, or jumping outside of current policy optimisations may be required to effectively learn the problem, even if this requires additional computation time. 
 \newline
 Various systems for this exploration exist within the PILCO repository. One particularly interesting method involves fantasising how data collected from new regions could reduce model uncertainty and therefore allow smart exploration to occur. \cite{exp}
 \newline
 Implementing methods such as this could prove vital to success on the real unicycle.
 \subsubsection{Removing Matlab from rollouts}
-Currently the unicycle is incapable of running independent from a computer. This is slightly impractical and additional wires may become a nuisance if balancing is achieved. For these reasons it may be beneficial to remove the need for a computer and Matlab script during rollouts. This would require writing the policy function onto the Pi, allow trajectory, and policy transfer onto the Pi, and using a UDP port between phone and Pi.
+Currently the unicycle is incapable of running independent from a computer. This is slightly impractical and additional wires may become a nuisance if balancing is achieved. For these reasons it may be beneficial to remove the need for a computer and Matlab script during rollouts. This would require writing the policy function onto the Pi, enabling trajectory and policy transfer onto the Pi, and using a UDP port between phone and Pi.
+\subsubsection{Unicycle release}
+Releasing the unicycle at the start of a rollout can be tricky to time correctly, which could cause extra difficulty in dynamic modelling. This issue hasn't been shown to be problematic yet due to low test number.
+\newline
+A simple fix for this would be to warn the user using a LED then initiate reading about 0.25s later to account for reaction time. A more thorough solution would be to introduce a release button to the unicycle, and allow the Pi to communicate back to Matlab to initiate readings.
 %----------------------------
 
 %------------------------------------------------------------------------
@@ -1204,10 +1278,23 @@ Maxom encoder - 512 pulses/rev. \url{https://www.maxongroup.com/maxon/view/produ
 \clearpage
 \section{Appendix}
 \subsection{Risk Assessment Review}
+The risks posed in this project were minimal for the majority of the time. Significant work was done using computers either for simulations, code modifications or CAD design. When using computers best practice was implemented. This involved ensuring adequate breaks were taken, and screen position and posture was set to minimise muscle strain.
+\newline
+When constructing the unicycle additional safety considerations were made. Work was conducted in a clear open space in order to minimise the risk of standing on sharp parts. Some filing and drilling were necessary; when doing these activities the parts were placed in a well ventilated area, safety glasses were worn, and parts were adequately clamped down. Drilling was also conducted slowly to decrease the temperature rise of the drill and parts, and therefore reduce risk of burns and fire.
+\newline
+When conducting rollouts measure were taken to reduce risk from; moving parts, batteries and cables. The tests were conducted in a spacious area to reduce the chance of accidental collisions, and all moving parts were encased in the new design. The Lithium Polymer battery poses risk of exploding if handled incorrectly. For this reason care was always taken when connecting, and charging was supervised. Connections between the unicycle and computer involved three wires. These were required to be long to ensure free movement of the unicycle, therefore care was taken to position these to not pose a trip hazard.
+\newline
+When performing tests and working on the unicycle other residents of my house were informed. This reduced the chance of other people walking in on a dangerous situation they were unaware of.
+\newline
+By following these practises no injuries were received during the project duration.
 
 \clearpage
-\subsection{Covid-19}
-
+\subsection{COVID-19 Disruption}
+Due to the closure of the department during the lockdown caused by COVID-19 some small aspects of the project were not realised. 
+\newline
+Sourcing correct screws for the new design and making small modifications after receiving parts was not possible due to department closure that week. This had very little effect on the project outcome, and these improvements are noted for future work.
+\newline
+Additionally it was very difficult to source a compatible DC charging cable for the battery, as this was left in the department. This limited the number of real rollouts that could be performed towards the project end. For this reason more emphasis was placed on explaining future work and possible additions to the unicycle.
 
 
 %------------------------------------------------

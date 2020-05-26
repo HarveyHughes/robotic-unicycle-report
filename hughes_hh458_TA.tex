@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn,12pt]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.5} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=25mm,columnsep=20pt,left=25mm]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Robotic Unicycle $\bullet$ May 2020 $\bullet$ Harvey Hughes} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\newenvironment{reusefigure}[2][htbp]
+  {\addtocounter{figure}{-1}%
+   \renewcommand{\theHfigure}{dupe-fig}% If you're using hyperref
+   \renewcommand{\thefigure}{\ref{#2}}% Figure counter is \ref
+   \renewcommand{\addcontentsline}[3]{}% Avoid placing figure in LoF
+   \begin{figure}[#1]}
+  {\end{figure}}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{array,multirow,graphicx}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\newcommand{\threepartdef}[6]
+{
+	\left\{
+		\begin{array}{lll}
+			#1 & \mbox{: } #2 \\
+			#3 & \mbox{: } #4 \\
+			#5 & \mbox{: } #6 \\
+			0 & \mbox{: } otherwise
+		\end{array}
+	\right.
+}
+\usepackage{multicol}
+\usepackage{stfloats}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Robotic Unicycle} % Article title
+\author{%
+%\textsc{Final Report} \\
+%\\
+\textsc{Harvey Hughes} \\
+\textsc{Supervisor: Professor Carl Rasmussen} \\
+}
+\date{\today} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\onecolumn
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+
+\section*{Technical Abstract}
+The application of machine learning in determining effective controllers opposed to using control theory could prove to highly useful when its not possible to determine system dynamics. This means new and complex tasks could be tackled with minimal knowledge about system behaviour.  A robotic unicycle is considered in this project to provide a sufficiently complex problem to fully test the PILCO algorithm and its success outside simulations.
+\newline
+\newline
+This project builds upon previous students work dating back to 2005. Throughout the projects history the unicycle being tested has evolved from a large and dangerous model, to a smaller model five years ago. In addition to model change, different control algorithms have been used and extensively built up. 
+\newline
+\newline
+The last two years of project work has seen significant improvements and simplifications to the software and electronics. This helped to pinpoint bottle-necks in the learning process but unfortunately the smaller unicycle showed great difficulty at balancing.
+\newline
+\newline
+Speculation that the unicycle roll limit of $17^{\circ}$ impeded learning was thoroughly investigated among other variables through simulations. These simulations showed that a mechanical redesign is necessary for learning to occur. This design aimed to upgrade and simplify the physical robot to match the progress made in electronics and software. The new design has a roll limit of $47^{\circ}$, softens impacts and reliably attaches sensors. 
+\newline
+\newline
+Numerous problems were found in existing communications methods between phone, computer and Raspberry Pi. These problems introduced large variation in delay between readings, and operated too slowly to provide sufficient learning. For sufficient learning a frequency above 20Hz was shown to be required. To solve these issues and provide additional simplicity UDP protocols were implemented for all transmissions. Unifying all transmissions enables the possibility of removing a computers involvement should it be desired in future.
+\newline
+\newline
+Upon starting rollouts further problems were located and fixed. The initial orientation was measured to remove offsets created in the dynamics learnt and therefore improve model accuracy. Trajectories end when the unicycle hits the ground, this detection proved to be unreliable and rollouts became invalid. Additional constraint checks involving future predictions were implemented in addition to manual confirmation.
+\newline
+\newline
+Unfortunately few rollouts were conducted due to problems charging the battery during the COVID-19 lockdown. The rollouts performed showed little progress at learning, but this is attributed to low battery and insufficient policy optimisations.
+\newline
+\newline
+During simulations and real rollouts policy optimisation often plateaued, or only learnt to wander instead of stay at the origin. The implementation of a quadratic controller and policy exploration techniques is believed to alleviate these issues.
+\newline
+\newline
+Future work should seek to investigate these issues, taking advantage of the updated and simplified mechanical, electrical, and software systems to identify key requirements. 
+
+
+\end{document}

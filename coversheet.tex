@@ -1,0 +1,138 @@
+\documentclass[twoside,twocolumn,12pt]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.5} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=25mm,columnsep=20pt,left=25mm]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\newenvironment{reusefigure}[2][htbp]
+  {\addtocounter{figure}{-1}%
+   \renewcommand{\theHfigure}{dupe-fig}% If you're using hyperref
+   \renewcommand{\thefigure}{\ref{#2}}% Figure counter is \ref
+   \renewcommand{\addcontentsline}[3]{}% Avoid placing figure in LoF
+   \begin{figure}[#1]}
+  {\end{figure}}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{array,multirow,graphicx}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\newcommand{\threepartdef}[6]
+{
+	\left\{
+		\begin{array}{lll}
+			#1 & \mbox{: } #2 \\
+			#3 & \mbox{: } #4 \\
+			#5 & \mbox{: } #6 \\
+			0 & \mbox{: } otherwise
+		\end{array}
+	\right.
+}
+\usepackage{multicol}
+\usepackage{stfloats}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Robotic Unicycle} % Article title
+\author{%
+%\textsc{Final Report} \\
+%\\
+\textsc{Harvey Hughes} \\
+\textsc{Supervisor: Professor Carl Rasmussen} \\
+}
+\date{\today} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+
+}
+
+
+
+
+\begin{document}
+\onecolumn
+\thispagestyle{empty}
+\begin{flushleft}
+ \includegraphics[width=7cm]{Engineering}\par
+\end{flushleft}
+\vspace{4cm}
+\begin{flushright}
+ {\huge\bfseries Robotic Unicycle\par}
+ \vspace{0.5cm}
+ {\Large M.Eng}\par
+ \vspace{4cm}
+ {\small Author Name: Harvey Hughes\par
+ Supervisor: Professor Carl Rasmussen\par
+ \vspace{1cm}
+ Date: 26\textsuperscript{th} May 2020}
+\end{flushright}
+\vfill
+ 
+{\footnotesize \noindent I hereby declare that, except where specifically indicated, the work submitted herein is my own original work.}\par
+\vspace{0.5cm}
+\begin{minipage}[t]{0.5\linewidth}
+{\small\textit{Signed: }\hrulefill}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\linewidth}
+{\small\textit{Date: 26/05/2020}}
+\end{minipage}
+\end{document}
+
+
+
+
+ 
+
